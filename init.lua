@@ -1,0 +1,6 @@
+require 'options'
+require 'keys'
+require 'plugins'
+require 'tsconfig'
+require 'mini_nvim'
+require 'lsp'
