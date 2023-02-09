@@ -1,5 +1,8 @@
 --- General Options ---
-local options = {
+
+local set = require 'utils'.set_opt
+
+set {
 	-- Creates a backup file
 	backup = false,
 	-- Required to keep multiple buffers open
@@ -75,13 +78,9 @@ local options = {
 	sidescrolloff = 12,
 }
 
--- Load key-value options
-for k, v in pairs(options) do
-	vim.opt[k] = v
-end
-
 vim.opt.shortmess:append "c"
 
--- Stop making line comments when pressing o, this abomination is required because Vim's ftplugins are fucking retarded.
+-- Stop making line comments when pressing o, this abomination is required
+-- because Vim's ftplugins are fucking retarded.
 vim.cmd [[autocmd FileType * set formatoptions-=o]]
 

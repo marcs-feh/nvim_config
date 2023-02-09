@@ -1,12 +1,8 @@
 --- Auto commands ---
+
+local set_local = require 'utils'.set_local
 local api = vim.api
 local g   = vim.g
-
-local set_local = function (t)
-	for k, v in pairs(t) do
-		vim.opt_local[k] = v
-	end
-end
 
 -- Indent sensitive languages and/or languages that look weird with hard tabs
 local indented_lang_opts = function()
