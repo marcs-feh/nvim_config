@@ -1,5 +1,4 @@
 --- Keybindings ---
-
 local def_key_opts = { noremap = true, silent = true }
 local function keymap(mode, seq, cmd, options)
 	if not options then
@@ -19,12 +18,12 @@ keymap("", "Q", "<Nop>")
 -- Save
 keymap("n", "<C-s>", ":w<CR>")
 
--- Open file to edit
-keymap("n", "<leader>e", ":Telescope find_files<CR>")
-
--- Open buffers
-keymap("n", "<leader>b", ":Telescope buffers<CR>")
-
+-- -- Open file to edit
+-- keymap("n", "<leader>e", ":Telescope find_files<CR>")
+--
+-- -- Open buffers
+-- keymap("n", "<leader>b", ":Telescope buffers<CR>")
+--
 -- Clear search highlight
 keymap("n", "<leader>l", ":noh<CR>")
 

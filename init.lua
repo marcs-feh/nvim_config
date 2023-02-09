@@ -1,6 +1,7 @@
 require 'options'
 require 'keys'
 require 'plugins'
+require 'auto_cmd'
 require 'tsconfig'
 require 'mini_nvim'
 require 'lsp'

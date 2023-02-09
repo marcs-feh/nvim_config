@@ -1,4 +1,4 @@
---- Treesitter
+--- Treesitter ---
 local ts_config = require 'nvim-treesitter.configs'
 
 ts_config.setup {

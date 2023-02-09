@@ -1,3 +1,5 @@
+--- Base16 colors ---
+
 local cols = {
 	gruvbox_dark = {
 		base00 = '#1d2021', base01 = '#3c3836', base02 = '#504945', base03 = '#665c54',
@@ -36,6 +38,5 @@ local cols = {
 		base0C = '#2aa198', base0D = '#268bd2', base0E = '#6c71c4', base0F = '#d33682',
 	},
 }
-
 
 return cols

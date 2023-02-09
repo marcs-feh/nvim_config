@@ -1,3 +1,4 @@
+--- Auto commands ---
 local api = vim.api
 local g   = vim.g
 

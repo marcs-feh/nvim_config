@@ -1,3 +1,5 @@
+--- LSP configuration ---
+
 local lsp_conf = require 'lspconfig'
 
 -- Enable a server by providing a config table or using `true`

@@ -1,3 +1,5 @@
+--- Mini.nvim setup ---
+
 -- Extend motions a/i
 require 'mini.ai'.setup()
 
@@ -17,6 +19,9 @@ require 'mini.comment'.setup {
 
 -- Statusbar
 require 'mini.statusline'.setup()
+
+-- Tabline
+require 'mini.tabline'.setup()
 
 -- Base16 colors
 require 'mini.base16'.setup {
