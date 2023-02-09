@@ -4,7 +4,7 @@ local lsp_conf = require 'lspconfig'
 -- Disable by not providing its name or by setting it to `false`/`nil`
 -- server_name = config | bool
 local enabled_servers = {
-	pyright = false,
+	pyright = true,
 	clangd  = nil,
 }
 
