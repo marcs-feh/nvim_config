@@ -25,8 +25,12 @@ require 'mini.tabline'.setup()
 
 -- Base16 colors
 require 'mini.base16'.setup {
-	palette = require 'colors'.gruvbox_dark,
+	palette = require 'colors'.mf,
 }
+
+vim.cmd [[highlight link @repeat Keyword]]
+vim.cmd [[highlight link @function.builtin Function]]
+-- vim.cmd [[highlight link @repeat Keyword]]
 
 -- Completion
 require 'mini.completion'.setup()
