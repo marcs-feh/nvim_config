@@ -75,6 +75,10 @@ map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, 
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+-- Quick align
+QuickAlign = require 'utils'.quick_align
+map("v", "<leader>a", ":lua QuickAlign(0, nil)<CR>")
+
 -- Move text
 map("x", "<C-j>", ":move '>+1<cr>gv-gv")
 map("x", "<C-k>", ":move '<-2<cr>gv-gv")

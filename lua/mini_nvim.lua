@@ -28,9 +28,11 @@ require 'mini.base16'.setup {
 	palette = require 'colors'.mf,
 }
 
-vim.cmd [[highlight link @repeat Keyword]]
-vim.cmd [[highlight link @function.builtin Function]]
--- vim.cmd [[highlight link @repeat Keyword]]
+local link = require 'utility'.hi_link_pairs
+link {
+	{'@repeat', 'Keyword'},
+	{'@function.builtin', 'Function'},
+}
 
 -- Completion
 require 'mini.completion'.setup()

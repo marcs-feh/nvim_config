@@ -1,5 +1,16 @@
 --- LSP configuration ---
 
+-- Enable a server by providing a config table or using `true`
+-- Disable by not providing its name or by setting it to `false`/`nil`
+-- server_name = config | bool
+local enabled_servers = {
+	pyright     = true,
+	clangd      = true,
+	emmet_ls    = true,
+	bashls      = true,
+	sumneko_lua = true,
+}
+
 local lsp_conf = require 'lspconfig'
 local map = require 'utils'.keymap
 
@@ -15,14 +26,6 @@ local def_on_attach = function(client, bufnr)
 	map('n', '<leader>vca', vim.lsp.buf.code_action, opts)
 	map('n', '<leader>r', vim.lsp.buf.references, opts)
 end
-
--- Enable a server by providing a config table or using `true`
--- Disable by not providing its name or by setting it to `false`/`nil`
--- server_name = config | bool
-local enabled_servers = {
-	pyright = true,
-	clangd  = nil,
-}
 
 for server, cfg in pairs(enabled_servers) do
 	if cfg then
