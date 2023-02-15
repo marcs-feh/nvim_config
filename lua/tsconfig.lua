@@ -2,8 +2,10 @@
 local ts_config = require 'nvim-treesitter.configs'
 
 ts_config.setup {
-	ensure_installed = { 'c', 'lua', 'vim' },
-	ignore_install = {'phpdoc', 'v'},
+	ensure_installed = {
+		'c', 'lua', 'vim',
+	},
+	ignore_install = {'phpdoc', 'javadoc', 'v'},
 
 	highlight = {
 		enable = true,
@@ -15,9 +17,8 @@ ts_config.setup {
 	},
 }
 
--- Personal recommendation for ensure_installed (popular languages)
---	'c', 'cpp', 'rust', 'java', 'c_sharp', 'go', 'swift', 'dart',
---	'scala', 'elixir', 'haskell', 'javascript', 'typescript', 'php',
---	'python','ruby', 'perl', 'lua', 'bash', 'powershell', 'scheme',
---	'vim', 'make', 'ninja', 'nix', 'sql', 'markdown', 'html', 'css',
---	'json',
+-- Personal recommendation for ensure_installed (popular languages + markup/config)
+-- 'c', 'cpp', 'zig', 'rust', 'glsl', 'java', 'kotlin', 'c_sharp', 'go', 'swift', 'dart', 'scala', 'elixir', 'ocaml',
+-- 'haskell', 'clojure', 'javascript', 'typescript', 'php', 'python', 'julia', 'ruby', 'perl', 'lua',
+-- 'bash', 'scheme', 'vim', 'make', 'ninja', 'cmake', 'meson', 'nix', 'sql', 'markdown',
+-- 'html', 'css', 'json', 'org', 'latex', 'ini', 'toml', 'yaml', 'gitignore', 'gitcommit', 'gomod', 'diff'

@@ -1,6 +1,6 @@
 --- Mini.nvim setup ---
 
-local theme = require 'colors'.mf
+local theme = require 'colors'.mf -- Set to nil to disable base16
 local link  = require 'utility'.hi_link_pairs
 local hi    = require 'utility'.hi_overwrite_pairs
 
@@ -31,19 +31,21 @@ require 'mini.comment'.setup {
 }
 
 -- Base16 colors
-require 'mini.base16'.setup {
-	palette = theme,
-}
+if theme then
+	require 'mini.base16'.setup {
+		palette = theme,
+	}
 
---- Overwrite some highlights for prettyness
-hi {
-	{'MiniStatuslineModeInsert', {bg = theme.base0A} },
-	{'MiniStatuslineModeNormal', {bg = theme.base09} },
-	{'MiniStatuslineModeVisual', {bg = theme.base0E} },
-}
+	--- Overwrite some highlights for prettyness
+	hi {
+		{'MiniStatuslineModeInsert', {bg = theme.base0A} },
+		{'MiniStatuslineModeNormal', {bg = theme.base09} },
+		{'MiniStatuslineModeVisual', {bg = theme.base0E} },
+	}
 
-link {
-	{'@repeat', 'Keyword'},
-	{'@function.builtin', 'Function'},
-}
-
+	link {
+		{'@repeat', 'Keyword'},
+		{'@function.builtin', 'Function'},
+		{'MatchParen', 'Visual'},
+	}
+end

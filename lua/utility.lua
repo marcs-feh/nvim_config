@@ -38,13 +38,14 @@ end
 
 -- Link highlight group1 to group22
 M.hi_link = function (group1, group2)
+	api.nvim_set_hl(0, group1, {})
 	cmd('highlight link ' .. group1 .. ' '.. group2)
 end
 
 -- For each pair in tbm link highlight group1 to group2
 M.hi_link_pairs = function (tbl)
 	for _, p in ipairs(tbl) do
-		cmd('highlight link ' .. p[1] .. ' '.. p[2])
+		M.hi_link(p[1], p[2])
 	end
 end
 

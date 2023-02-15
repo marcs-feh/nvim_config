@@ -1,7 +1,7 @@
 --- Base16 colors ---
 
 local cols = {
-	gruvbox_dark = {
+	gruvbox = {
 		base00 = '#1d2021', base01 = '#3c3836', base02 = '#504945', base03 = '#665c54',
 		base04 = '#bdae93', base05 = '#d5c4a1', base06 = '#ebdbb2', base07 = '#fbf1c7',
 		base08 = '#fb4934', base09 = '#fe8019', base0A = '#fabd2f', base0B = '#b8bb26',
@@ -12,18 +12,6 @@ local cols = {
 		base04 = '#565c64', base05 = '#abb2bf', base06 = '#b6bdca', base07 = '#c8ccd4',
 		base08 = '#e06c75', base09 = '#d19a66', base0A = '#e5c07b', base0B = '#98c379',
 		base0C = '#56b6c2', base0D = '#61afef', base0E = '#c678dd', base0F = '#be5046',
-	},
-	solarized_dark = {
-		base00 = '#002b36', base01 = '#073642', base02 = '#586e75', base03 = '#657b83',
-		base04 = '#839496', base05 = '#93a1a1', base06 = '#eee8d5', base07 = '#fdf6e3',
-		base08 = '#dc322f', base09 = '#cb4b16', base0A = '#b58900', base0B = '#859900',
-		base0C = '#2aa198', base0D = '#268bd2', base0E = '#6c71c4', base0F = '#d33682',
-	},
-	solarized_light = {
-		base00 = '#fdf6e3', base01 = '#eee8d5', base02 = '#93a1a1', base03 = '#839496',
-		base04 = '#657b83', base05 = '#586e75', base06 = '#073642', base07 = '#002b36',
-		base08 = '#dc322f', base09 = '#cb4b16', base0A = '#b58900', base0B = '#859900',
-		base0C = '#2aa198', base0D = '#268bd2', base0E = '#6c71c4', base0F = '#d33682',
 	},
 	monokai = {
 		base00 = '#272822', base01 = '#383830', base02 = '#49483e', base03 = '#75715e',
