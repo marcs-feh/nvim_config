@@ -1,6 +1,6 @@
 --- General Options ---
 
-local set = require 'utils'.set_opt
+local set = require 'mf.utils'.set_opt
 
 set {
 	-- Creates a backup file

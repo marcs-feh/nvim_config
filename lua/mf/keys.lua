@@ -1,6 +1,6 @@
 --- Keybindings ---
 
-local map = require 'utils'.keymap
+local map = require 'mf.utils'.keymap
 
 -- Remap space as leader key
 map("", "<Space>", "<Nop>")
@@ -76,8 +76,9 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- Quick align
-QuickAlign = require 'utils'.quick_align
-map("v", "<leader>a", ":lua QuickAlign(0, nil)<CR>")
+local quick_align = require 'mf.utils'.quick_align
+local align_fn    = function() quick_align(0, nil) end
+map("v", "<leader>a", align_fn)
 
 -- Move text
 map("x", "<C-j>", ":move '>+1<cr>gv-gv")

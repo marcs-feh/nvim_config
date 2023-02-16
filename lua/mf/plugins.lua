@@ -21,9 +21,11 @@ packer.init {
 
 return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
-	use 'nvim-treesitter/nvim-treesitter'
 	use 'echasnovski/mini.nvim'
+	use 'nvim-treesitter/nvim-treesitter'
   use 'neovim/nvim-lspconfig'
+	use 'nvim-lua/plenary.nvim'
+	use 'nvim-telescope/telescope.nvim'
 
   if packer_bootstrap then packer.sync() end
 end)

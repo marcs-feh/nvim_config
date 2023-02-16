@@ -1,8 +1,8 @@
 --- Mini.nvim setup ---
 
-local theme = require 'colors'.mf -- Set to nil to disable base16
-local link  = require 'utils'.hi_link_pairs
-local hi    = require 'utils'.hi_overwrite_pairs
+local theme = require 'mf.colors'.mf -- Set to nil to disable base16
+local link  = require 'mf.utils'.hi_link_pairs
+local hi    = require 'mf.utils'.hi_overwrite_pairs
 
 -- Extend motions a/i
 require 'mini.ai'.setup()

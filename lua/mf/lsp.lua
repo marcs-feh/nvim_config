@@ -12,7 +12,7 @@ local enabled_servers = {
 }
 
 local lsp_conf = require 'lspconfig'
-local map = require 'utils'.keymap
+local map = require 'mf.utils'.keymap
 
 -- Default on_attach function, sets keybindings
 local def_on_attach = function(client, bufnr)

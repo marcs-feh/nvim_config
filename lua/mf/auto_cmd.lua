@@ -1,6 +1,6 @@
 --- Auto commands ---
 
-local set = require 'utils'.set_local
+local set = require 'mf.utils'.set_local
 local api = vim.api
 local g   = vim.g
 
