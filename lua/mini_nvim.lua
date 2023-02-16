@@ -1,8 +1,8 @@
 --- Mini.nvim setup ---
 
 local theme = require 'colors'.mf -- Set to nil to disable base16
-local link  = require 'utility'.hi_link_pairs
-local hi    = require 'utility'.hi_overwrite_pairs
+local link  = require 'utils'.hi_link_pairs
+local hi    = require 'utils'.hi_overwrite_pairs
 
 -- Extend motions a/i
 require 'mini.ai'.setup()
@@ -46,6 +46,8 @@ if theme then
 	link {
 		{'@repeat', 'Keyword'},
 		{'@function.builtin', 'Function'},
+		{'@include', '@preproc'},
+		{'@preproc', 'Keyword'},
 		{'MatchParen', 'Visual'},
 	}
 end
