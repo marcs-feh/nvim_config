@@ -41,13 +41,17 @@ if theme then
 		{'MiniStatuslineModeInsert', {bg = theme.base0A} },
 		{'MiniStatuslineModeNormal', {bg = theme.base09} },
 		{'MiniStatuslineModeVisual', {bg = theme.base0E} },
+		{'MiniTablineModifiedHidden', {fg = theme.base04, bg = theme.base01, italic = true, }},
 	}
-
 	link {
 		{'@repeat', 'Keyword'},
 		{'@function.builtin', 'Function'},
 		{'@include', '@preproc'},
 		{'@preproc', 'Keyword'},
 		{'MatchParen', 'Visual'},
+		{'MiniTablineModifiedVisible', 'MiniTablineModifiedHidden'},
+		{'MiniTablineCurrent', 'MiniTablineModifiedCurrent'},
+		{'MiniTablineVisible', 'MiniTablineHidden'},
 	}
+
 end
