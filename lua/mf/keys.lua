@@ -13,12 +13,9 @@ map("", "Q", "<Nop>")
 -- Save
 map("n", "<C-s>", ":w<CR>")
 
--- -- Open file to edit
--- map("n", "<leader>e", ":Telescope find_files<CR>")
---
--- -- Open buffers
--- map("n", "<leader>b", ":Telescope buffers<CR>")
---
+-- Open file to edit
+map("n", "<leader>e", ":Telescope find_files<CR>")
+
 -- Clear search highlight
 map("n", "<leader>l", ":noh<CR>")
 

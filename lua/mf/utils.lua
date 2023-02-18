@@ -2,14 +2,25 @@
 
 local M = {}
 local api = vim.api
-local cmd = vim.cmd
+
+-- Execute one or a series of vim commands
+M.vim_cmd = function (cmd)
+	if type(cmd) ~= 'table' then
+		cmd = { cmd }
+	end
+	for _, c in ipairs(cmd) do
+		vim.cmd(c)
+	end
+end
 
 local def_key_opts = { noremap = true, silent = true }
+
+-- Set global keymap
 M.keymap = function(mode, seq, cmd, options)
 	if not options then
 		options = def_key_opts
 	end
- vim.keymap.set(mode, seq, cmd, options)
+	vim.keymap.set(mode, seq, cmd, options)
 end
 
 -- Use table of opt=val with setlocal
@@ -69,7 +80,7 @@ end
 -- Link highlight group1 to group22
 M.hi_link = function (group1, group2)
 	api.nvim_set_hl(0, group1, {})
-	cmd('highlight link ' .. group1 .. ' '.. group2)
+	M.vim_cmd { 'highlight link ' .. group1 .. ' '.. group2 }
 end
 
 -- For each pair in tbm link highlight group1 to group2
@@ -90,5 +101,26 @@ M.quick_align = function(buf_num, pattern)
 		{ split_pattern = pattern, justify_side = 'left' })
 	api.nvim_buf_set_lines(0, from - 1, to, true, new_lines)
 end
+
+-- Create an include guard for C/C++ files
+M.include_guard = function(bufnum)
+	local name    = api.nvim_buf_get_name(bufnum)
+	local cur_pos = api.nvim_win_get_cursor(bufnum)
+	name = 'INCLUDE_' .. name:
+		gsub('.*/', ''):
+		gsub('%.', '_'):
+		upper() .. '_'
+
+	M.vim_cmd {
+		'normal ggO#ifndef '..name,
+		'normal o#define '..name,
+		'normal o',
+		'normal Go',
+		'normal o#endif /* include guard */',
+	}
+	-- Put cursor back
+	api.nvim_win_set_cursor(bufnum, cur_pos)
+end
+
 
 return M

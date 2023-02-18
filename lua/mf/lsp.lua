@@ -25,6 +25,7 @@ local def_on_attach = function(client, bufnr)
 	map('n', '<leader>vrn', vim.lsp.buf.rename, opts)
 	map('n', '<leader>vca', vim.lsp.buf.code_action, opts)
 	map('n', '<leader>r', vim.lsp.buf.references, opts)
+	map('n', '<leader>D', ':Telescope diagnostics<CR>')
 end
 
 for server, cfg in pairs(enabled_servers) do

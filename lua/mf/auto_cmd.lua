@@ -1,6 +1,7 @@
 --- Auto commands ---
 
-local set = require 'mf.utils'.set_local
+local U = require 'mf.utils'
+local set, map = U.set_local, U.keymap
 local api = vim.api
 local g   = vim.g
 
@@ -26,6 +27,9 @@ local c_opts = function()
 	set {
 		commentstring = '// %s',
 	}
+	local opts = {noremap = true, silent = true, buffer = 0}
+	map ('n', '<leader>G', function() U.include_guard(0) end , opts)
+	map ('i', '<C-s>', 'this->', opts)
 end
 
 api.nvim_create_autocmd('FileType', {
