@@ -92,14 +92,18 @@ end
 
 -- Wrapper for mini.align
 M.quick_align = function(buf_num, pattern)
-	pattern = pattern or vim.fn.input('Pattern: ', '', 'buffer')
 	local from  = api.nvim_buf_get_mark(buf_num, "<")[1]
 	local to    = api.nvim_buf_get_mark(buf_num, ">")[1]
+	if from > to then
+		from, to = to, from
+	end
+	pattern = pattern or vim.fn.input('Pattern: ', '', 'buffer')
 	local lines = api.nvim_buf_get_lines(buf_num, from - 1, to, true)
 
 	local new_lines = MiniAlign.align_strings(lines,
-		{ split_pattern = pattern, justify_side = 'left' })
-	api.nvim_buf_set_lines(0, from - 1, to, true, new_lines)
+		{ split_pattern = pattern, justify_side = 'left' }
+	)
+	api.nvim_buf_set_lines(buf_num, from - 1, to, true, new_lines)
 end
 
 -- Create an include guard for C/C++ files

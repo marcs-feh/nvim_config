@@ -73,9 +73,8 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- Quick align
-local quick_align = require 'mf.utils'.quick_align
-local align_fn    = function() quick_align(0, nil) end
-map("v", "<leader>a", align_fn)
+QuickAlign = require 'mf.utils'.quick_align
+map("v", "<leader>a", '<ESC>:lua QuickAlign(0, nil)<CR>')
 
 -- Move text
 map("x", "<C-j>", ":move '>+1<cr>gv-gv")
