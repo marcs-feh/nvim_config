@@ -126,5 +126,31 @@ M.include_guard = function(bufnum)
 	api.nvim_win_set_cursor(bufnum, cur_pos)
 end
 
+-- Create constructors, assignment and destructor
+M.cpp_methods = function()
+	local class = vim.fn.input('Type name: ', '', 'buffer')
+	if not class:match('%S+') then return end
+	local lines = {
+		'// Default constructor',
+		class..'(){}',
+		'',
+		'// Copy constructor',
+		class..'(const '..class..'&){}',
+		'',
+		'// Copy assignment',
+		'void operator=(const '..class..'&){}',
+		'',
+		'// Move constructor',
+		class..'('..class..'&&){}',
+		'',
+		'// Move assignment',
+		'void operator=('..class..'&&){}',
+		'',
+	}
+
+		for _, line in ipairs(lines) do
+			M.vim_cmd { 'norm o'..line }
+		end
+end
 
 return M

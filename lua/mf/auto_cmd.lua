@@ -29,6 +29,7 @@ local c_opts = function()
 	}
 	local opts = {noremap = true, silent = true, buffer = 0}
 	map ('n', '<leader>G', function() U.include_guard(0) end , opts)
+	map ('n', '<leader>M', function() U.cpp_methods() end , opts)
 	map ('i', '<C-s>', 'this->', opts)
 end
 
