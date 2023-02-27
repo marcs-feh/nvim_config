@@ -20,15 +20,13 @@ packer.init {
 }
 
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
-	use 'echasnovski/mini.nvim'
-	use 'nvim-treesitter/nvim-treesitter'
-  use 'neovim/nvim-lspconfig'
-	use 'nvim-lua/plenary.nvim'
-	use 'nvim-telescope/telescope.nvim'
+  use 'wbthomason/packer.nvim'          -- Package manager
+	use 'echasnovski/mini.nvim'           -- Many neovim extensions
+	use 'nvim-treesitter/nvim-treesitter' -- Good highlighting, folding, etc.
+  use 'neovim/nvim-lspconfig'           -- LSP configurations
+	use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
+	use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 
   if packer_bootstrap then packer.sync() end
 end)
-
-
 

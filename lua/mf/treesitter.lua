@@ -3,7 +3,24 @@ local ts_config = require 'nvim-treesitter.configs'
 
 ts_config.setup {
 	ensure_installed = {
-		'c', 'lua', 'vim',
+		-- General purpose (Systems programming)
+		'c', 'cpp', 'zig', 'rust',
+		-- General purpose (Memory managed)
+		'java', 'kotlin', 'c_sharp', 'go', 'swift', 'dart','python', 'ruby',
+		-- General purpose (Functional)
+		'scala', 'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'nix',
+		-- Web dev
+		'javascript', 'typescript', 'php',
+		-- Graphics and GPU accel.
+		'glsl', 'cuda',
+		-- Scripting
+		'lua', 'scheme', 'vim', 'fish', 'bash', 'perl',
+		-- Build systems
+		'make', 'ninja', 'cmake', 'meson',
+		-- Markup and configuration
+		'html', 'css', 'json', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
+		-- Other
+		'gitignore', 'gitcommit', 'gomod', 'diff', 'sql', 'awk', 'graphql',
 	},
 	ignore_install = {'phpdoc', 'javadoc', 'v'},
 
@@ -17,8 +34,3 @@ ts_config.setup {
 	},
 }
 
--- Personal recommendation for ensure_installed (popular languages + markup/config)
--- 'c', 'cpp', 'zig', 'rust', 'glsl', 'java', 'kotlin', 'c_sharp', 'go', 'swift', 'dart', 'scala', 'elixir', 'ocaml',
--- 'haskell', 'clojure', 'javascript', 'typescript', 'php', 'python', 'julia', 'ruby', 'perl', 'lua',
--- 'bash', 'scheme', 'vim', 'make', 'ninja', 'cmake', 'meson', 'nix', 'sql', 'markdown',
--- 'html', 'css', 'json', 'org', 'latex', 'ini', 'toml', 'yaml', 'gitignore', 'gitcommit', 'gomod', 'diff'

@@ -56,7 +56,7 @@ set {
 	-- The number of spaces inserted for each indentation
 	shiftwidth = 2,
 	-- Highlight the current line
-	cursorline = false,
+	cursorline = true,
 	-- Numbered lines
 	number = true,
 	-- Relative numbered lines

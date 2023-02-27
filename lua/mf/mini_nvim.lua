@@ -36,22 +36,26 @@ if theme then
 		palette = theme,
 	}
 
-	--- Overwrite some highlights for prettyness
 	hi {
-		{'MiniStatuslineModeInsert', {bg = theme.base0A} },
-		{'MiniStatuslineModeNormal', {bg = theme.base09} },
-		{'MiniStatuslineModeVisual', {bg = theme.base0E} },
+		{'LineNr', {fg = theme.base02, bg = theme.base00}},
+		{'SignColumn', {bg = theme.base00}},
+		{'CursorLine', {bg = theme.base00}},
+		{'CursorLineNr', {fg = theme.base03, bg = theme.base00}},
+		{'MiniStatuslineModeInsert',  {bg = theme.base0A} },
+		{'MiniStatuslineModeNormal',  {bg = theme.base09} },
+		{'MiniStatuslineModeVisual',  {bg = theme.base0E} },
 		{'MiniTablineModifiedHidden', {fg = theme.base04, bg = theme.base01, italic = true, }},
 	}
+
 	link {
 		{'@repeat', 'Keyword'},
 		{'@function.builtin', 'Function'},
 		{'@include', '@preproc'},
 		{'@preproc', 'Keyword'},
+		{'CursorLineSign', 'CursorLine'},
 		{'MatchParen', 'Visual'},
 		{'MiniTablineModifiedVisible', 'MiniTablineModifiedHidden'},
 		{'MiniTablineCurrent', 'MiniTablineModifiedCurrent'},
 		{'MiniTablineVisible', 'MiniTablineHidden'},
 	}
-
 end

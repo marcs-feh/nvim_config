@@ -44,11 +44,6 @@ M.set_global = function (t)
 	end
 end
 
--- Clear a highlight group
-M.hi_clear = function(name)
-	api.nvim_set_hl(0, name, {})
-end
-
 -- Set a highlight group
 M.hi_set = function(name, val)
 	api.nvim_set_hl(0, name, val)
@@ -56,9 +51,13 @@ end
 
 -- Set highlight group for each key in tbl
 M.hi_set_pairs = function (tbl)
-	for group, val in pairs(tbl) do
-		api.nvim_set_hl(0, group, val)
+	for _, p in pairs(tbl) do
+		api.nvim_set_hl(0, p[1], p[2])
 	end
+end
+-- Clear a highlight group
+M.hi_clear = function(name)
+	api.nvim_set_hl(0, name, {})
 end
 
 -- Overwrite highlight group properties (keeps everything else intact)
