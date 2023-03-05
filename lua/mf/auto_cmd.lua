@@ -1,50 +1,61 @@
 --- Auto commands ---
-
-local U = require 'mf.utils'
-local set, map = U.set_local, U.keymap
+local U   = require 'mf.utils'
 local api = vim.api
 local g   = vim.g
+local cmd = vim.cmd
+local set = U.set_local
+local map = U.keymap
 
 -- Indent sensitive languages and/or languages that look weird with hard tabs
-local indented_lang_opts = function()
-	set {
-		expandtab = true,
-	}
-end
+api.nvim_create_autocmd('FileType', {
+	pattern  = 'markdown,ninja,scheme,org,python,nim,lisp,sml',
+	callback = function()
+		set {
+			expandtab = true,
+		}
+	end
+})
 
--- Python specific options
-local python_opts = function()
-	g.python_recommended_style = 0
-	set {
-		expandtab = true,
-		tabstop = 2,
-		shiftwidth = 2,
-	}
-end
+-- XML, HTML
+api.nvim_create_autocmd('FileType', {
+	pattern = 'xml,html',
+	callback = function()
+		set {
+			expandtab  = true,
+			shiftwidth = 1,
+			tabstop    = 1,
+		}
+	end,
+})
 
--- C/C++ specific options
-local c_opts = function()
-	set {
-		commentstring = '// %s',
-	}
-	local opts = {noremap = true, silent = true, buffer = 0}
-	map ('n', '<leader>G', function() U.include_guard(0) end , opts)
-	map ('n', '<leader>M', function() U.cpp_methods() end , opts)
-	map ('i', '<C-s>', 'this->', opts)
-end
-
+-- Python
 api.nvim_create_autocmd('FileType', {
 	pattern  = 'python',
-	callback = python_opts,
+	callback = function()
+		g.python_recommended_style = 0
+		set {
+			expandtab  = true,
+			tabstop    = 2,
+			shiftwidth = 2,
+		}
+	end,
 })
 
-api.nvim_create_autocmd('FileType', {
-	pattern  = 'markdown,ninja,scheme,org,python,nim',
-	callback = indented_lang_opts,
-})
-
+-- C/C++
 api.nvim_create_autocmd('FileType', {
 	pattern  = 'c,cpp',
-	callback = c_opts,
+	callback = function()
+		set {
+			commentstring = '// %s',
+			foldmethod = 'indent',
+		}
+		local opts = {noremap = true, silent = true, buffer = 0}
+		map('n', '<leader>G', function() U.include_guard(0) end , opts)
+		map('n', '<leader>M', function() U.cpp_methods() end , opts)
+		map('i', '<C-f>', '->', opts)
+		-- cmd [[TSDisable indent]] -- Treesitter indentation doesnt play very well with macros
+	end
 })
+
+
 

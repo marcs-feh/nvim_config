@@ -20,7 +20,7 @@ ts_config.setup {
 		-- Markup and configuration
 		'html', 'css', 'json', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
 		-- Other
-		'gitignore', 'gitcommit', 'gomod', 'diff', 'sql', 'awk', 'graphql',
+		'gitignore', 'gitcommit', 'diff', 'sql', 'awk', 'graphql', 'verilog',
 	},
 	ignore_install = {'phpdoc', 'javadoc', 'v'},
 
