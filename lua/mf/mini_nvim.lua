@@ -1,9 +1,5 @@
 --- Mini.nvim setup ---
 
-local theme = require 'mf.colors'.mf -- Set to nil to disable base16
-local link  = require 'mf.utils'.hi_link_pairs
-local hi    = require 'mf.utils'.hi_overwrite_pairs
-
 -- Extend motions a/i
 require 'mini.ai'.setup()
 
@@ -30,32 +26,3 @@ require 'mini.comment'.setup {
 	},
 }
 
--- Base16 colors
-if theme then
-	require 'mini.base16'.setup {
-		palette = theme,
-	}
-
-	hi {
-		{'LineNr', {fg = theme.base02, bg = theme.base00}},
-		{'SignColumn', {bg = theme.base00}},
-		{'CursorLine', {bg = theme.base00}},
-		{'CursorLineNr', {fg = theme.base03, bg = theme.base00}},
-		{'MiniStatuslineModeInsert',  {bg = theme.base0A} },
-		{'MiniStatuslineModeNormal',  {bg = theme.base09} },
-		{'MiniStatuslineModeVisual',  {bg = theme.base0E} },
-		{'MiniTablineModifiedHidden', {fg = theme.base04, bg = theme.base01, italic = true, }},
-	}
-
-	link {
-		{'@repeat', 'Keyword'},
-		{'@function.builtin', 'Function'},
-		{'@include', '@preproc'},
-		{'@preproc', 'Keyword'},
-		{'CursorLineSign', 'CursorLine'},
-		{'MatchParen', 'Visual'},
-		{'MiniTablineModifiedVisible', 'MiniTablineModifiedHidden'},
-		{'MiniTablineCurrent', 'MiniTablineModifiedCurrent'},
-		{'MiniTablineVisible', 'MiniTablineHidden'},
-	}
-end
