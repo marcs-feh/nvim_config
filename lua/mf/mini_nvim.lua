@@ -9,7 +9,7 @@ require 'mini.surround'.setup()
 -- Alignment motions
 require 'mini.align'.setup()
 
--- Statusbar
+-- Statusline
 require 'mini.statusline'.setup()
 
 -- Tabline

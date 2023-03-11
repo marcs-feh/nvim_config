@@ -27,6 +27,7 @@ return packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
 	use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 	use 'marcs-feh/nvim-theme'
+	use 'nvim-lualine/lualine.nvim'
 
   if packer_bootstrap then packer.sync() end
 end)
