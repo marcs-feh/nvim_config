@@ -57,5 +57,17 @@ api.nvim_create_autocmd('FileType', {
 	end
 })
 
+-- Rust, I *really* hate how rust projects insist on objectively bad indentation
+api.nvim_create_autocmd('FileType', {
+	pattern = 'rust',
+	callback = function()
+		set {
+			expandtab  = false,
+			shiftwidth = 2,
+			tabstop    = 2,
+		}
+	end,
+})
+
 
 

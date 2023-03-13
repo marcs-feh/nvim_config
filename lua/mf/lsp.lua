@@ -4,11 +4,12 @@
 -- Disable by not providing its name or by setting it to `false`/`nil`
 -- server_name = config | bool
 local enabled_servers = {
-	pyright  = true,
-	clangd   = true,
-	emmet_ls = true,
-	bashls   = true,
-	lua_ls   = true,
+	pyright       = true,
+	clangd        = true,
+	emmet_ls      = true,
+	bashls        = true,
+	lua_ls        = true,
+	rust_analyzer = true,
 }
 
 local lsp_conf = require 'lspconfig'

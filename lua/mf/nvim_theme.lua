@@ -1,4 +1,4 @@
 require 'nvim-theme'.setup {
-	transparent = false,
-	bright_cursor_line = true,
+	transparent = true,
+	bright_cursor_line = false,
 }
