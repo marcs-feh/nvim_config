@@ -96,7 +96,10 @@ M.quick_align = function(buf_num, pattern)
 	if from > to then
 		from, to = to, from
 	end
-	pattern = pattern or vim.fn.input('Pattern: ', '', 'buffer')
+	if not pattern then
+		pattern = vim.fn.input('Pattern: ', '', 'buffer')
+	end
+
 	local lines = api.nvim_buf_get_lines(buf_num, from - 1, to, true)
 
 	local new_lines = MiniAlign.align_strings(lines,
@@ -123,33 +126,6 @@ M.include_guard = function(bufnum)
 	}
 	-- Put cursor back
 	api.nvim_win_set_cursor(bufnum, cur_pos)
-end
-
--- Create constructors, assignment and destructor
-M.cpp_methods = function()
-	local class = vim.fn.input('Type name: ', '', 'buffer')
-	if not class:match('%S+') then return end
-	local lines = {
-		'// Default constructor',
-		class..'(){}',
-		'',
-		'// Copy constructor',
-		class..'(const '..class..'&){}',
-		'',
-		'// Copy assignment',
-		'void operator=(const '..class..'&){}',
-		'',
-		'// Move constructor',
-		class..'('..class..'&&){}',
-		'',
-		'// Move assignment',
-		'void operator=('..class..'&&){}',
-		'',
-	}
-
-		for _, line in ipairs(lines) do
-			M.vim_cmd { 'norm o'..line }
-		end
 end
 
 return M

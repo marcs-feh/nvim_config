@@ -51,7 +51,6 @@ api.nvim_create_autocmd('FileType', {
 		}
 		local opts = {noremap = true, silent = true, buffer = 0}
 		map('n', '<leader>G', function() U.include_guard(0) end , opts)
-		map('n', '<leader>M', function() U.cpp_methods() end , opts)
 		map('i', '<C-f>', '->', opts)
 		-- cmd [[TSDisable indent]] -- Treesitter indentation doesnt play very well with macros
 	end
@@ -75,9 +74,9 @@ api.nvim_create_autocmd('FileType', {
 	callback = function()
 		set {
 			commentstring = '// %s',
-			expandtab = true,
-			tabstop = 4,
-			shiftwidth = 4,
+			expandtab     = true,
+			tabstop       = 4,
+			shiftwidth    = 4,
 		}
 	end
 })

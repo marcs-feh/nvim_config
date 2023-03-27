@@ -72,7 +72,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- Quick align
-map("v", "<leader>a", function () require 'mf.utils'.quick_align(0, nil) end)
+map("v", "<leader>a", "<ESC>:lua require 'mf.utils'.quick_align(0, nil)<CR>")
 
 -- Toggle Pairs
 map("n", "<leader><C-p>", function()
