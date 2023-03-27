@@ -26,3 +26,6 @@ require 'mini.comment'.setup {
 	},
 }
 
+-- Auto pairs
+require 'mini.pairs'.setup()
+

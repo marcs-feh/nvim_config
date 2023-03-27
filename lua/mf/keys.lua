@@ -1,5 +1,4 @@
 --- Keybindings ---
-
 local map = require 'mf.utils'.keymap
 
 -- Remap space as leader key
@@ -73,9 +72,16 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- Quick align
-QuickAlign = require 'mf.utils'.quick_align
-map("v", "<leader>a", '<ESC>:lua QuickAlign(0, nil)<CR>')
+map("v", "<leader>a", function () require 'mf.utils'.quick_align(0, nil) end)
 
+-- Toggle Pairs
+map("n", "<leader><C-p>", function()
+	local b = vim.b.minipairs_disable
+	print(('Autopairs: %s'):format(b and 'ON' or 'OFF'))
+	vim.b.minipairs_disable = not b
+end)
+
+--'<ESC>:lua QuickAlign(0, nil)<CR>')
 -- Move text
 map("x", "<C-j>", ":move '>+1<cr>gv-gv")
 map("x", "<C-k>", ":move '<-2<cr>gv-gv")

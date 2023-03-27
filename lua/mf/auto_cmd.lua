@@ -69,5 +69,16 @@ api.nvim_create_autocmd('FileType', {
 	end,
 })
 
-
+-- Zig, another language that has terrible indentation on most projects
+api.nvim_create_autocmd('FileType', {
+	pattern = 'zig',
+	callback = function()
+		set {
+			commentstring = '// %s',
+			expandtab = true,
+			tabstop = 4,
+			shiftwidth = 4,
+		}
+	end
+})
 

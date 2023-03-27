@@ -2,21 +2,31 @@
 
 -- Enable a server by providing a config table or using `true`
 -- Disable by not providing its name or by setting it to `false`/`nil`
--- server_name = config | bool
+-- server_name = config | bool (use default config)
 local enabled_servers = {
 	pyright       = true,
+	zls           = true,
 	clangd        = true,
-	emmet_ls      = true,
+	emmet_ls      = nil,
 	bashls        = true,
-	lua_ls        = true,
 	rust_analyzer = true,
+	lua_ls        = {
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = {'vim'},
+				},
+				telemetry = { enable = false },
+			},
+		}
+	},
 }
 
 local lsp_conf = require 'lspconfig'
 local map = require 'mf.utils'.keymap
 
 -- Default on_attach function, sets keybindings
-local def_on_attach = function(client, bufnr)
+local def_on_attach = function(_, bufnr)
 	local opts = { noremap=true, silent=true, buffer=bufnr }
 	map('n', 'gD', vim.lsp.buf.declaration, opts)
 	map('n', 'gd', vim.lsp.buf.definition, opts)
