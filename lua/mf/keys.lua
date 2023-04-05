@@ -28,6 +28,9 @@ map("n", "<C-a>", ":normal ggVG<CR>")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "<C-d>", "<C-d>zz")
 
+-- Center text with padding
+map("n", "<leader>z", ":NoNeckPain<CR>")
+
 -- Split windows
 map("n", "<leader>sh", ":split<CR>")
 map("n", "<leader>sv", ":vsplit<CR>")

@@ -28,4 +28,5 @@ require 'mini.comment'.setup {
 
 -- Auto pairs
 require 'mini.pairs'.setup()
+vim.g.minipairs_disable = false -- Disable by default
 

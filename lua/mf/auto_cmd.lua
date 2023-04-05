@@ -2,6 +2,7 @@
 local U   = require 'mf.utils'
 local api = vim.api
 local g   = vim.g
+local b   = vim.b
 local cmd = vim.cmd
 local set = U.set_local
 local map = U.keymap
@@ -49,9 +50,11 @@ api.nvim_create_autocmd('FileType', {
 			commentstring = '// %s',
 			foldmethod = 'indent',
 		}
+		b.minipairs_disable = true
 		local opts = {noremap = true, silent = true, buffer = 0}
 		map('n', '<leader>G', function() U.include_guard(0) end , opts)
 		map('i', '<C-f>', '->', opts)
+
 		-- cmd [[TSDisable indent]] -- Treesitter indentation doesnt play very well with macros
 	end
 })

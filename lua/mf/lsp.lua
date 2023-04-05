@@ -6,10 +6,13 @@
 local enabled_servers = {
 	pyright       = true,
 	zls           = true,
-	clangd        = true,
 	emmet_ls      = nil,
 	bashls        = true,
 	rust_analyzer = true,
+	clangd        = {
+		cmd = {'clangd', '-header-insertion=never'}
+
+	},
 	lua_ls        = {
 		settings = {
 			Lua = {

@@ -10,6 +10,7 @@ M.setup = function ()
 	require 'mf.lsp'
 	require 'mf.telescope'
 	require 'mf.nvim_theme'
+	require 'mf.no_neck_pain'
 	-- Useful for debugging
 	P = function (t) print(vim.inspect(t)) end
 end
