@@ -112,17 +112,19 @@ end
 M.include_guard = function(bufnum)
 	local name    = api.nvim_buf_get_name(bufnum)
 	local cur_pos = api.nvim_win_get_cursor(bufnum)
-	name = 'INCLUDE_' .. name:
+	name = '_' .. name:
 		gsub('.*/', ''):
 		gsub('%.', '_'):
-		upper() .. '_'
+		gsub('%s', ' '):
+		gsub(' ', '_'):
+		lower() .. '_include_'
 
 	M.vim_cmd {
 		'normal ggO#ifndef '..name,
 		'normal o#define '..name,
 		'normal o',
 		'normal Go',
-		'normal o#endif /* include guard */',
+		'normal o#endif /* Include guard */',
 	}
 	-- Put cursor back
 	api.nvim_win_set_cursor(bufnum, cur_pos)

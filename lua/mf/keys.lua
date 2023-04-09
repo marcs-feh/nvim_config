@@ -29,7 +29,11 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "<C-d>", "<C-d>zz")
 
 -- Center text with padding
-map("n", "<leader>z", ":NoNeckPain<CR>")
+local center_width = 140
+map("n", "<C-k>z", (":NoNeckPain<CR>:NoNeckPainResize %d<CR>"):format(center_width))
+map("n", "<leader>z=", ":NoNeckPainWidthUp<CR>")
+map("n", "<leader>z-", ":NoNeckPainWidthDown<CR>")
+
 
 -- Split windows
 map("n", "<leader>sh", ":split<CR>")
