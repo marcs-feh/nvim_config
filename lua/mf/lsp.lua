@@ -9,7 +9,7 @@ local enabled_servers = {
 	-- Zig
 	zls = nil,
 	-- HTML Snippets
-	emmet_ls = nil,
+	emmet_ls = true,
 	-- Bash
 	bashls = true,
 	-- Rust
