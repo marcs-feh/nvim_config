@@ -1,5 +1,4 @@
 --- General Options ---
-
 local set = require 'mf.utils'.set_opt
 
 set {

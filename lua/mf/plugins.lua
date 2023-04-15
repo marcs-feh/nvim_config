@@ -28,6 +28,7 @@ return packer.startup(function(use)
 	use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 	use 'marcs-feh/nvim-theme'            -- Colorscheme
 	use 'marcs-feh/odin.vim'              -- Basic Highlight for odin
+	use 'nvim-tree/nvim-tree.lua'         -- File tree
 	use 'hrsh7th/nvim-cmp'                -- Completion
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
@@ -37,10 +38,10 @@ return packer.startup(function(use)
 		'shortcuts/no-neck-pain.nvim',
 		tag = '*'
 	}
-	use {                                 -- Sophisticated snippet engine
-		"L3MON4D3/LuaSnip",
-		tag = "v<CurrentMajor>.*",
-	}
+	-- use {                                 -- Sophisticated snippet engine
+	-- 	"L3MON4D3/LuaSnip",
+	-- 	tag = "v<CurrentMajor>.*",
+	-- }
 
 	if packer_bootstrap then packer.sync() end
 end)

@@ -15,6 +15,9 @@ map("n", "<C-s>", ":w<CR>")
 -- Open file to edit
 map("n", "<leader>e", ":Telescope find_files<CR>")
 
+-- Toggle file tree
+map("n", "<C-t>", ":NvimTreeToggle<CR>")
+
 -- Clear search highlight
 map("n", "<leader>l", ":noh<CR>")
 
