@@ -4,16 +4,22 @@
 -- Disable by not providing its name or by setting it to `false`/`nil`
 -- server_name = config | bool (use default config)
 local enabled_servers = {
-	pyright       = true,
-	zls           = true,
-	emmet_ls      = nil,
-	bashls        = true,
+	-- Python
+	pyright = true,
+	-- Zig
+	zls = nil,
+	-- HTML Snippets
+	emmet_ls = nil,
+	-- Bash
+	bashls = true,
+	-- Rust
 	rust_analyzer = true,
-	clangd        = {
+	-- C/C++
+	clangd = {
 		cmd = {'clangd', '-header-insertion=never'}
-
 	},
-	lua_ls        = {
+	-- Lua
+	lua_ls = {
 		settings = {
 			Lua = {
 				diagnostics = {
@@ -40,6 +46,8 @@ local def_on_attach = function(_, bufnr)
 	map('n', '<leader>vca', vim.lsp.buf.code_action, opts)
 	map('n', '<leader>r', vim.lsp.buf.references, opts)
 	map('n', '<leader>D', ':Telescope diagnostics<CR>')
+	map('n', '<leader>vS', ':LspStop<CR>')
+	map('n', '<leader>vR', ':LspRestart<CR>')
 end
 
 for server, cfg in pairs(enabled_servers) do

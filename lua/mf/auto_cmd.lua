@@ -17,6 +17,17 @@ api.nvim_create_autocmd('FileType', {
 	end
 })
 
+-- SQL
+api.nvim_create_autocmd('FileType', {
+	pattern  = 'sql',
+	callback = function()
+		set {
+			expandtab = true,
+			commentstring = '--%s',
+		}
+	end
+})
+
 -- XML, HTML
 api.nvim_create_autocmd('FileType', {
 	pattern = 'xml,html',
