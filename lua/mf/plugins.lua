@@ -21,16 +21,26 @@ packer.init {
 
 return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'          -- Package manager
-	use 'echasnovski/mini.nvim'           -- Many neovim extensions
+	use 'echasnovski/mini.nvim'           -- Many small neovim extensions
 	use 'nvim-treesitter/nvim-treesitter' -- Good highlighting, folding, etc.
 	use 'neovim/nvim-lspconfig'           -- LSP configurations
 	use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
 	use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 	use 'marcs-feh/nvim-theme'            -- Colorscheme
-	use 'marcs-feh/odin.vim'              -- Highlight for odin
-	use {"shortcuts/no-neck-pain.nvim",   -- Center padding for lonely buffers
-		tag = "*" }
-
+	use 'marcs-feh/odin.vim'              -- Basic Highlight for odin
+	use 'hrsh7th/nvim-cmp'                -- Completion
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use {                                 -- Center padding for lonely buffers
+		'shortcuts/no-neck-pain.nvim',
+		tag = '*'
+	}
+	use {                                 -- Sophisticated snippet engine
+		"L3MON4D3/LuaSnip",
+		tag = "v<CurrentMajor>.*",
+	}
 
 	if packer_bootstrap then packer.sync() end
 end)

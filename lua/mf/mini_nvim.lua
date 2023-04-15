@@ -15,9 +15,6 @@ require 'mini.statusline'.setup()
 -- Tabline
 require 'mini.tabline'.setup()
 
--- Completion
-require 'mini.completion'.setup()
-
 -- Comment motions
 require 'mini.comment'.setup {
 	mappings = {
