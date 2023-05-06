@@ -3,17 +3,25 @@ local U   = require 'mf.utils'
 local api = vim.api
 local g   = vim.g
 local b   = vim.b
-local cmd = vim.cmd
+local cmd = vim.api.nvim_command
 local set = U.set_local
 local map = U.keymap
 
 -- Indent sensitive languages and/or languages that look weird with hard tabs
 api.nvim_create_autocmd('FileType', {
-	pattern  = 'markdown,ninja,scheme,org,python,nim,lisp,sml',
+	pattern  = 'markdown,ninja,scheme,org,python,nim,lisp,sml,clojure',
 	callback = function()
 		set {
 			expandtab = true,
 		}
+	end
+})
+
+-- LISPs
+api.nvim_create_autocmd('FileType', {
+	pattern = 'scheme,clojure,lisp',
+	callback = function()
+		MiniPairs.unmap('i', "'", "''")
 	end
 })
 

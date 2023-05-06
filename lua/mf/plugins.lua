@@ -38,10 +38,10 @@ return packer.startup(function(use)
 		'shortcuts/no-neck-pain.nvim',
 		tag = '*'
 	}
-	-- use {                                 -- Sophisticated snippet engine
-	-- 	"L3MON4D3/LuaSnip",
-	-- 	tag = "v<CurrentMajor>.*",
-	-- }
+	use {                                 -- Sophisticated snippet engine
+		"L3MON4D3/LuaSnip",
+		tag = "v<CurrentMajor>.*",
+	}
 
 	if packer_bootstrap then packer.sync() end
 end)
