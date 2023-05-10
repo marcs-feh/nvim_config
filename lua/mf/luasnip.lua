@@ -1,13 +1,13 @@
 local ls = require 'luasnip'
 local map = require 'mf.utils'.keymap
 
-map({'i', 's'}, '<C-k>', function()
+map({'i', 's'}, '<C-j>', function()
 	if ls.expand_or_jumpable() then
 		ls.expand_or_jump()
 	end
 end)
 
-map({'i', 's'}, '<C-j>', function()
+map({'i', 's'}, '<C-k>', function()
 	if ls.jumpable(-1) then
 		ls.jump(-1)
 	end
@@ -32,8 +32,9 @@ local rep = require 'luasnip.extras'.rep
 local c = ls.choice_node
 local f = ls.function_node
 
-
+local cpp_cons_opts = function () return { t'{}', t' = default;', t' = delete;', t';'} end
 local first_lower = function(args) return args[1][1]:sub(1,1):lower() end
+
 ls.add_snippets(nil, {
 	all = {
 		s('date', { c(1, {
@@ -43,30 +44,46 @@ ls.add_snippets(nil, {
 			f(function() return os.date('%b %d(%a) %Y') end),
 			})}),
 	},
+	c = {
+		s('type', fmt(
+			[[
+			typedef {} {} {};
+
+			{} {} {{
+			{}
+			}};
+			]], {c(1, {t'struct', t'enum', t'union'}),
+			     i(2), rep(2), rep(1), rep(2), i(0)}
+		)),
+	},
 	cpp = {
+		s('type', fmt(
+			[[
+			{} {} {{
+			{}
+			}};
+			]], {c(1, {t'struct', t'enum class', t'union'}),
+			    i(2), i(0)})),
 		s('cons', fmt(
 			[[
-			{}(){{
-				// TODO: impl.
-			}}
-			{}(const {}& {}){{
-				// TODO: impl.
-			}}
-			{}({}&& {}){{
-				// TODO: impl.
-			}}
-			~{}(){{
-				// TODO: impl.
-			}}
+			{}
+			{}(){}
+
+			{}(const {}& {}){}
+
+			{}({}&& {}){}
+
+			~{}(){}
 			]],
-			-- TODO: choice for init
 			{
-				i(1),--[[ Name ]]
-				rep(1), rep(1), --[[ Copy ctor ]]
-				f(first_lower,{1}),
-				rep(1), rep(1), --[[ Move ctor ]]
-				f(first_lower,{1}),
+				i(1),--[[ Ctor ]]
+				c(2, cpp_cons_opts()),
+				rep(1), rep(1), f(first_lower,{1}), --[[ Copy ctor ]]
+				c(3, cpp_cons_opts()),
+				rep(1), rep(1), f(first_lower,{1}), --[[ Move ctor ]]
+				c(4, cpp_cons_opts()),
 				rep(1), -- [[ Dtor ]]
-		}))
+				c(5, cpp_cons_opts()),
+		})),
 	}
 })
