@@ -66,7 +66,6 @@ ls.add_snippets(nil, {
 			    i(2), i(0)})),
 		s('cons', fmt(
 			[[
-			{}
 			{}(){}
 
 			{}(const {}& {}){}
