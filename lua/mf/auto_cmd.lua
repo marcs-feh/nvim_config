@@ -9,7 +9,7 @@ local map = U.keymap
 
 -- Indent sensitive languages and/or languages that look weird with hard tabs
 api.nvim_create_autocmd('FileType', {
-	pattern  = 'markdown,ninja,scheme,org,python,nim,lisp,sml,clojure',
+	pattern  = 'markdown,ninja,scheme,org,python,nim,lisp,sml,clojure,vim',
 	callback = function()
 		set {
 			expandtab = true,

@@ -19,7 +19,7 @@ map("n", "<leader>e", ":Telescope find_files<CR>")
 map("n", "<leader>f", ":NvimTreeToggle<CR>")
 
 -- Clear search highlight
-map("n", "<leader>l", ":noh<CR>")
+map("n", "<leader>l", ":noh<CR>:echo<CR>")
 
 -- Clear trailing whitespace
 map("n", "<leader>W", ":%s/\\s\\+$//<CR>:noh<CR>")
@@ -36,7 +36,6 @@ local center_width = 140
 map("n", "<C-k>z", (":NoNeckPain<CR>:NoNeckPainResize %d<CR>"):format(center_width))
 map("n", "<leader>z=", ":NoNeckPainWidthUp<CR>")
 map("n", "<leader>z-", ":NoNeckPainWidthDown<CR>")
-
 
 -- Split windows
 map("n", "<leader>sh", ":split<CR>")
@@ -74,8 +73,8 @@ map("n", "H", ":bprevious<CR>")
 map("n", "<leader>n", ":enew<CR>")
 
 -- Mini.completion
-map("i", "<Tab>",   [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true } )
-map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
+-- map("i", "<Tab>",   [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true } )
+-- map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
 
 -- Stay in indent mode
 map("v", "<", "<gv")

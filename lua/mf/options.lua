@@ -17,7 +17,7 @@ set {
 	-- The encoding written to a file
 	fileencoding = "utf-8",
 	-- Highlight all matches on previous search pattern
-	hlsearch = true,
+	hlsearch = false,
 	-- Ignore case in search patterns
 	ignorecase = true,
 	-- Allow the mouse to be used in neovim
