@@ -19,6 +19,19 @@ map({'i', 's'}, '<C-l>', function()
 	end
 end)
 
+map({'i', 's'}, '<C-h>', function()
+	if ls.choice_active() then
+		ls.change_choice(-1)
+	end
+end)
+
+map('i', '<C-c>', function()
+	if ls.expand_or_jumpable() then
+		vim.cmd [[LuaSnipUnlinkCurrent]]
+		print('Snippet cancelled')
+	end
+end)
+
 ls.config.set_config {
 	history = false,
 	updateevents = 'TextChanged,TextChangedI',
@@ -26,13 +39,12 @@ ls.config.set_config {
 }
 
 local s, i, t = ls.snippet, ls.insert_node, ls.text_node
-local snip = require 'luasnip'
 local fmt = require 'luasnip.extras.fmt'.fmt
 local rep = require 'luasnip.extras'.rep
 local c = ls.choice_node
 local f = ls.function_node
 
-local cpp_cons_opts = function () return { t'{}', t' = default;', t' = delete;', t';'} end
+local cpp_cons_opts = function () return { t'{}', t';', t' = default;', t' = delete;'} end
 local first_lower = function(args) return args[1][1]:sub(1,1):lower() end
 
 ls.add_snippets(nil, {
@@ -57,32 +69,46 @@ ls.add_snippets(nil, {
 		)),
 	},
 	cpp = {
-		s('type', fmt(
+		s('copy', fmt(
 			[[
-			{} {} {{
-			{}
-			}};
-			]], {c(1, {t'struct', t'enum class', t'union'}),
-			    i(2), i(0)})),
+			{}(const {}& {}){}
+
+			{}& operator=(const {}& {}){}
+			]],
+			{
+				i(1),
+				rep(1), f(first_lower,{1}),
+				c(2, cpp_cons_opts()),
+				rep(1), rep(1), f(first_lower,{1}),
+				c(3, cpp_cons_opts()),
+			}
+		)),
+		s('move', fmt(
+			[[
+			{}({}&& {}){}
+
+			{}& operator=({}&& {}){}
+			]],
+			{
+				i(1),
+				rep(1), f(first_lower,{1}),
+				c(2, cpp_cons_opts()),
+
+				rep(1), rep(1), f(first_lower,{1}),
+				c(3, cpp_cons_opts())
+			}
+		)),
 		s('cons', fmt(
 			[[
 			{}(){}
 
-			{}(const {}& {}){}
-
-			{}({}&& {}){}
-
 			~{}(){}
 			]],
 			{
-				i(1),--[[ Ctor ]]
+				i(1),
 				c(2, cpp_cons_opts()),
-				rep(1), rep(1), f(first_lower,{1}), --[[ Copy ctor ]]
-				c(3, cpp_cons_opts()),
-				rep(1), rep(1), f(first_lower,{1}), --[[ Move ctor ]]
-				c(4, cpp_cons_opts()),
 				rep(1), -- [[ Dtor ]]
-				c(5, cpp_cons_opts()),
+				c(3, cpp_cons_opts()),
 		})),
 	}
 })
