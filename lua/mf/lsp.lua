@@ -14,6 +14,8 @@ local enabled_servers = {
 	bashls = true,
 	-- Rust
 	rust_analyzer = true,
+	-- Svelte
+	svelte = true,
 	-- C/C++
 	clangd = {
 		cmd = {'clangd', '-header-insertion=never'}

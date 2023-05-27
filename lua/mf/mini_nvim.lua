@@ -1,5 +1,4 @@
 --- Mini.nvim setup ---
-
 -- Extend motions a/i
 require 'mini.ai'.setup()
 

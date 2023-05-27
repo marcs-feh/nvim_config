@@ -23,11 +23,10 @@ return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'          -- Package manager
 	use 'echasnovski/mini.nvim'           -- Many small neovim extensions
 	use 'nvim-treesitter/nvim-treesitter' -- Good highlighting, folding, etc.
-	use 'neovim/nvim-lspconfig'           -- LSP configurations
 	use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
+	use 'neovim/nvim-lspconfig'           -- LSP configurations
 	use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 	use 'marcs-feh/nvim-theme'            -- Colorscheme
-	use 'marcs-feh/odin.vim'              -- Basic Highlight for odin
 	use 'nvim-tree/nvim-tree.lua'         -- File tree
 	use 'hrsh7th/nvim-cmp'                -- Completion
 	use 'hrsh7th/cmp-nvim-lsp'

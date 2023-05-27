@@ -4,7 +4,7 @@ local ts_config = require 'nvim-treesitter.configs'
 ts_config.setup {
 	ensure_installed = {
 		-- General purpose (Systems programming)
-		'c', 'cpp', 'zig', 'rust',
+		'c', 'cpp', 'odin','zig', 'rust',
 		-- General purpose (Memory managed)
 		'java', 'kotlin', 'c_sharp', 'go', 'swift', 'dart','python', 'ruby',
 		-- General purpose (Functional)
