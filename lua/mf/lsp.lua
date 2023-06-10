@@ -12,6 +12,8 @@ local enabled_servers = {
 	gopls = true,
 	-- Zig
 	zls = nil,
+	-- Svelte
+	svelte = true,
 	-- HTML Snippets
 	emmet_ls = true,
 	-- Bash

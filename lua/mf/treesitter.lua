@@ -6,7 +6,7 @@ ts_config.setup {
 		-- General purpose (Systems programming)
 		'c', 'cpp', 'odin','zig', 'rust',
 		-- General purpose (Memory managed)
-		'java', 'kotlin', 'c_sharp', 'go', 'swift', 'dart','python', 'ruby',
+		'java', 'kotlin', 'c_sharp', 'go', 'dart','python', 'ruby',
 		-- General purpose (Functional)
 		'scala', 'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'nix',
 		-- Web dev
