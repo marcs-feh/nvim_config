@@ -1,6 +1,5 @@
 --- Auto commands ---
-local U   = require 'mf.utils'
-local api = vim.api
+local U   = require 'mf.utils' local api = vim.api
 local g   = vim.g
 local b   = vim.b
 local cmd = vim.api.nvim_command
@@ -14,6 +13,26 @@ api.nvim_create_autocmd('FileType', {
 		set {
 			expandtab = true,
 		}
+	end
+})
+
+-- Odin
+api.nvim_create_autocmd('FileType', {
+	pattern  = 'odin',
+	callback = function()
+		set {
+			expandtab = false,
+			commentstring = '// %s',
+		}
+		b.minipairs_disable = true
+	end
+})
+
+-- Shell languages
+api.nvim_create_autocmd('FileType', {
+	pattern = 'bash,zsh,sh,fish,ps1',
+	callback = function()
+		b.minipairs_disable = true
 	end
 })
 
@@ -84,8 +103,8 @@ api.nvim_create_autocmd('FileType', {
 	callback = function()
 		set {
 			expandtab  = false,
-			shiftwidth = 2,
-			tabstop    = 2,
+			shiftwidth = 4,
+			tabstop    = 4,
 		}
 	end,
 })
@@ -96,7 +115,7 @@ api.nvim_create_autocmd('FileType', {
 	callback = function()
 		set {
 			commentstring = '// %s',
-			expandtab     = true,
+			expandtab     = false,
 			tabstop       = 4,
 			shiftwidth    = 4,
 		}

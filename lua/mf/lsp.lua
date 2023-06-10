@@ -6,6 +6,10 @@
 local enabled_servers = {
 	-- Python
 	pyright = true,
+	-- Odin
+	ols = true,
+	-- Go
+	gopls = true,
 	-- Zig
 	zls = nil,
 	-- HTML Snippets
@@ -24,9 +28,7 @@ local enabled_servers = {
 	lua_ls = {
 		settings = {
 			Lua = {
-				diagnostics = {
-					globals = {'vim'},
-				},
+				diagnostics = { globals = {'vim'}, },
 				telemetry = { enable = false },
 			},
 		}

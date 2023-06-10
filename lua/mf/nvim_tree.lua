@@ -1,7 +1,7 @@
 require 'nvim-tree'.setup {
 	disable_netrw = true,
 	hijack_netrw = true,
-	sync_root_with_cwd = true,
+	sync_root_with_cwd = false,
 	view = {
 		cursorline = true,
 		width = 30,

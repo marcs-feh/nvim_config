@@ -57,16 +57,14 @@ ls.add_snippets(nil, {
 			})}),
 	},
 	c = {
-		s('type', fmt(
+		s('struct', fmt(
 			[[
-			typedef {} {} {};
+			typedef struct {} {};
 
-			{} {} {{
-			{}
+			struct {} {{
+				{}
 			}};
-			]], {c(1, {t'struct', t'enum', t'union'}),
-			     i(2), rep(2), rep(1), rep(2), i(0)}
-		)),
+			]], {i(1), rep(1), rep(1), i(0)})),
 	},
 	cpp = {
 		s('copy', fmt(
