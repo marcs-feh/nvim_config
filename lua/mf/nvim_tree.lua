@@ -4,7 +4,7 @@ require 'nvim-tree'.setup {
 	sync_root_with_cwd = false,
 	view = {
 		cursorline = true,
-		width = 30,
+		width = 32,
 	},
 	renderer = {
 		indent_width = 2,
@@ -47,10 +47,6 @@ require 'nvim-tree'.setup {
 			enable = true,
 			global = false,
 			restrict_above_cwd = false,
-		},
-		expand_all = {
-			max_folder_discovery = 128,
-			exclude = {},
 		},
 	},
 	live_filter = {

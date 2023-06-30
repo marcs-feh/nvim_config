@@ -97,7 +97,7 @@ api.nvim_create_autocmd('FileType', {
 	end
 })
 
--- Rust, I *really* hate how rust projects insist on objectively bad indentation
+-- Rust, I *really* hate how rust projects insist on objectively bad indentation for accessibility
 api.nvim_create_autocmd('FileType', {
 	pattern = 'rust',
 	callback = function()
@@ -109,10 +109,12 @@ api.nvim_create_autocmd('FileType', {
 	end,
 })
 
--- Zig, another language that has terrible indentation on most projects
+-- Zig, another language that shoves shit indentation down everyone's throat.
+-- zig fmt is *literally* satan.
 api.nvim_create_autocmd('FileType', {
 	pattern = 'zig',
 	callback = function()
+		g.zig_fmt_autosave = 0
 		set {
 			commentstring = '// %s',
 			expandtab     = false,
