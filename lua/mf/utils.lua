@@ -5,9 +5,9 @@ local api = vim.api
 
 -- Compile in a terminal using shell cmd
 M.compile = function(shell_cmd)
-	local width = 40
-	vim.cmd [[vsplit]]
-	vim.cmd('vertical resize ' .. width)
+	local height = 20
+	vim.cmd [[topleft split]]
+	vim.cmd('horizontal resize ' .. height)
 	vim.cmd('terminal '..shell_cmd)
 	vim.cmd [[normal i]]
 end
