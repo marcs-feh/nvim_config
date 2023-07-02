@@ -11,7 +11,7 @@ local enabled_servers = {
 	-- Go
 	gopls = true,
 	-- Zig
-	zls = nil,
+	zls = true,
 	-- Svelte
 	svelte = true,
 	-- HTML Snippets
@@ -20,8 +20,6 @@ local enabled_servers = {
 	bashls = true,
 	-- Rust
 	rust_analyzer = true,
-	-- Svelte
-	svelte = true,
 	-- C/C++
 	clangd = {
 		cmd = {'clangd', '-header-insertion=never'}

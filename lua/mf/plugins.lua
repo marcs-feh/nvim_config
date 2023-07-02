@@ -1,3 +1,5 @@
+-- TODO: specify install_path as var
+
 --- Plugins ---
 local ensure_packer = function()
 	local fn = vim.fn
@@ -24,8 +26,7 @@ return packer.startup(function(use)
 	use 'echasnovski/mini.nvim'           -- Many small neovim extensions
 	use 'nvim-treesitter/nvim-treesitter' -- Good highlighting, folding, etc.
 	use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
-	-- use 'neovim/nvim-lspconfig'           -- LSP configurations
-	use 'marcs-feh/nvim-lspconfig'
+	use 'neovim/nvim-lspconfig'           -- LSP configurations
 	use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 	use 'marcs-feh/nvim-theme'            -- Colorscheme
 	use 'nvim-tree/nvim-tree.lua'         -- File tree

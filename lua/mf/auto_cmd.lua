@@ -1,8 +1,8 @@
 --- Auto commands ---
-local U   = require 'mf.utils' local api = vim.api
+local U   = require 'mf.utils'
+local api = vim.api
 local g   = vim.g
 local b   = vim.b
-local cmd = vim.api.nvim_command
 local set = U.set_local
 local map = U.keymap
 
@@ -20,6 +20,9 @@ api.nvim_create_autocmd('FileType', {
 api.nvim_create_autocmd('FileType', {
 	pattern  = 'odin',
 	callback = function()
+		local opts = {noremap = true, silent = true, buffer = 0}
+		map('n', '<C-c><C-c>', function() U.compile('odin build .') end, opts)
+		map('n', '<C-c><C-t>', function() U.compile('odin test .') end, opts)
 		set {
 			expandtab = false,
 			commentstring = '// %s',
@@ -103,21 +106,23 @@ api.nvim_create_autocmd('FileType', {
 	callback = function()
 		set {
 			expandtab  = false,
-			shiftwidth = 4,
-			tabstop    = 4,
+			shiftwidth = 2,
+			tabstop    = 2,
 		}
 	end,
 })
 
--- Zig, another language that shoves shit indentation down everyone's throat.
--- zig fmt is *literally* satan.
+-- Zig, another language that shoves bad indentation down everyone's throat.
 api.nvim_create_autocmd('FileType', {
 	pattern = 'zig',
 	callback = function()
+		local opts = {noremap = true, silent = true, buffer = 0}
 		g.zig_fmt_autosave = 0
+		map('n', '<C-c><C-c>', function() U.compile('zig build run') end, opts)
+		map('n', '<C-c><C-t>', function() U.compile('zig build test') end, opts)
 		set {
 			commentstring = '// %s',
-			expandtab     = false,
+			expandtab     = true,
 			tabstop       = 4,
 			shiftwidth    = 4,
 		}

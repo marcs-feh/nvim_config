@@ -3,6 +3,15 @@
 local M = {}
 local api = vim.api
 
+-- Compile in a terminal using shell cmd
+M.compile = function(shell_cmd)
+	local width = 40
+	vim.cmd [[vsplit]]
+	vim.cmd('vertical resize ' .. width)
+	vim.cmd('terminal '..shell_cmd)
+	vim.cmd [[normal i]]
+end
+
 -- Execute one or a series of vim commands
 M.vim_cmd = function (cmd)
 	if type(cmd) ~= 'table' then
@@ -55,6 +64,7 @@ M.hi_set_pairs = function (tbl)
 		api.nvim_set_hl(0, p[1], p[2])
 	end
 end
+
 -- Clear a highlight group
 M.hi_clear = function(name)
 	api.nvim_set_hl(0, name, {})
