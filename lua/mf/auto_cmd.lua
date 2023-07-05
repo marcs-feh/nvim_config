@@ -21,7 +21,7 @@ api.nvim_create_autocmd('FileType', {
 	pattern  = 'odin',
 	callback = function()
 		local opts = {noremap = true, silent = true, buffer = 0}
-		map('n', '<C-c><C-c>', function() U.compile('odin build .') end, opts)
+		map('n', '<C-c><C-c>', function() U.compile('odin run .') end, opts)
 		map('n', '<C-c><C-t>', function() U.compile('odin test .') end, opts)
 		set {
 			expandtab = false,

@@ -4,8 +4,12 @@ local M = {}
 local api = vim.api
 
 -- Compile in a terminal using shell cmd
-M.compile = function(shell_cmd)
+M.compile = function(shell_cmd, save)
+	if save == nil then save = true end
 	local height = 20
+
+	if save then vim.cmd [[wa!]] end
+	vim.cmd [[]]
 	vim.cmd [[topleft split]]
 	vim.cmd('horizontal resize ' .. height)
 	vim.cmd('terminal '..shell_cmd)
