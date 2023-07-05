@@ -330,6 +330,30 @@ end
 do
 	local ts_config = require 'nvim-treesitter.configs'
 
+	LowRamTSInstall = function(parsers, groups_of)
+		if not groups_of then groups_of = 8 end
+		local commands = {}
+		do
+			local i = 1
+			while i <= #parsers do
+				local c = 'TSInstall '
+				for n = 1, groups_of, 1 do
+					c = c .. parsers[i - (n - 1)]
+				end
+				commands[#commands+1] = c
+				i = i + groups_of
+			end
+			local rest = 'TSInstall '
+			for j = i, #parsers, 1 do
+				rest = rest .. parsers[j]
+			end
+			commands[#commands+1] = rest
+		end
+		for i, v in ipairs(commands) do
+			print(i, v)
+		end
+	end
+
 	ts_config.setup {
 		ensure_installed = {
 			--[[
