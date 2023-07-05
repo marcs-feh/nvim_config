@@ -284,7 +284,7 @@ do
 	map("v", ">", ">gv")
 
 	-- Quick align
-	map("v", "<leader>a", "<ESC>:lua require 'mf.utils'.quick_align(0, nil)<CR>")
+	map("v", "<leader>a", "<ESC>:lua QuickAlign(0, nil)<CR>")
 
 	-- Toggle Pairs
 	map("n", "<leader><C-p>", function()
@@ -540,7 +540,7 @@ do
 	}
 
 	local lsp_conf = require 'lspconfig'
-	local map = require 'mf.utils'.keymap
+	local map = utils.keymap
 
 	-- Default on_attach, sets keybindings
 	local def_on_attach = function(_, bufnr)
@@ -708,4 +708,9 @@ do
 			},
 		},
 	}
+end
+
+---| Global Exports |---
+do
+	QuickAlign = utils.quick_align
 end
