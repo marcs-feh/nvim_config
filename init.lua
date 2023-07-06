@@ -331,6 +331,7 @@ do
 	local ts_config = require 'nvim-treesitter.configs'
 
 	ts_config.setup {
+		sync_install = false, -- Enable if you have <8GB RAM, will take longer to compile
 		ensure_installed = {
 			--[[
 			-- General purpose (Systems programming)
