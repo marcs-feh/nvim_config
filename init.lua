@@ -160,6 +160,11 @@ do
 		sidescrolloff = 12,
 	}
 
+	vim.opt.shortmess:append "c"
+
+	-- Stop making line comments when pressing o, this abomination is required
+	-- because Vim's ftplugins are fucking retarded.
+	vim.cmd [[autocmd FileType * set formatoptions-=o]]
 end
 
 ---| Plugins |---
