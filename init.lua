@@ -195,7 +195,7 @@ do
 		use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
 		use 'neovim/nvim-lspconfig'           -- LSP configurations
 		use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
-		use 'marcs-feh/nvim-theme'            -- Colorscheme
+		use 'marcs-feh/colors-22.nvim'        -- Colorscheme
 		use 'nvim-tree/nvim-tree.lua'         -- File tree
 		use 'dcampos/nvim-snippy'             -- Snippet engine
 		use 'hrsh7th/nvim-cmp'                -- Completion
@@ -325,7 +325,7 @@ end
 
 ---| Colorscheme |---
 do
-	require 'nvim-theme'.setup {
+	require 'colors-22'.setup {
 		transparent = true,
 		bright_cursor_line = false,
 	}
