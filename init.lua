@@ -1,18 +1,6 @@
 ---| Utilities |---
 local utils = {}
 utils = {
-	compile = function(shell_cmd, save)
-		if save == nil then save = true end
-		local height = 20
-
-		if save then vim.cmd [[wa!]] end
-		vim.cmd [[]]
-		vim.cmd [[topleft split]]
-		vim.cmd('horizontal resize ' .. height)
-		vim.cmd('terminal '..shell_cmd)
-		vim.cmd [[normal i]]
-	end,
-
 	set_opt = function(t, scope)
 		if not scope then scope = 'default' end
 		local opt_map = {
@@ -84,6 +72,7 @@ utils = {
 ---| Options |---
 do
 	local set = function(opt) utils.set_opt(opt) end
+	local tabsize = 4
 	set {
 		-- Creates a backup file
 		backup = false,
@@ -134,9 +123,9 @@ do
 		-- Required for colorschemes to work
 		termguicolors = true,
 		-- Insert 2 spaces for a tab
-		tabstop = 2,
+		tabstop = tabsize,
 		-- The number of spaces inserted for each indentation
-		shiftwidth = 2,
+		shiftwidth = tabsize,
 		-- Highlight the current line
 		cursorline = true,
 		-- Numbered lines
@@ -196,6 +185,7 @@ do
 		use 'neovim/nvim-lspconfig'           -- LSP configurations
 		use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 		use 'marcs-feh/colors-22.nvim'        -- Colorscheme
+		use 'marcs-feh/compile.nvim'          -- Colorscheme
 		use 'nvim-tree/nvim-tree.lua'         -- File tree
 		use 'dcampos/nvim-snippy'             -- Snippet engine
 		use 'hrsh7th/nvim-cmp'                -- Completion
@@ -253,6 +243,7 @@ do
 	map("n", "<A-j>", "<C-w>j")
 	map("n", "<A-k>", "<C-w>k")
 	map("n", "<A-l>", "<C-w>l")
+	map("n", "<C-o>", "<C-w>w")
 	map("n", "<leader>q", ":close<CR>")
 
 	-- Resize windows
@@ -397,8 +388,6 @@ do
 		pattern  = 'odin',
 		callback = function()
 			local opts = {noremap = true, silent = true, buffer = 0}
-			map('n', '<C-c><C-c>', function() utils.compile('odin run .') end, opts)
-			map('n', '<C-c><C-t>', function() utils.compile('odin test .') end, opts)
 			set {
 				expandtab = false,
 				commentstring = '// %s',
@@ -407,9 +396,9 @@ do
 		end
 	})
 
-	-- Shell languages
+	-- No autopairs
 	add_autocmd('FileType', {
-		pattern = 'bash,zsh,sh,fish,ps1',
+		pattern = 'bash,zsh,sh,fish,ps1,markdown',
 		callback = function()
 			b.minipairs_disable = true
 		end
@@ -482,8 +471,6 @@ do
 		callback = function()
 			set {
 				expandtab  = false,
-				shiftwidth = 2,
-				tabstop    = 2,
 			}
 		end,
 	})
@@ -492,10 +479,7 @@ do
 	add_autocmd('FileType', {
 		pattern = 'zig',
 		callback = function()
-			local opts = {noremap = true, silent = true, buffer = 0}
 			g.zig_fmt_autosave = 0
-			map('n', '<C-c><C-c>', function() utils.compile('zig build run') end, opts)
-			map('n', '<C-c><C-t>', function() utils.compile('zig build test') end, opts)
 			set {
 				commentstring = '// %s',
 				expandtab     = true,
@@ -714,6 +698,24 @@ do
 			},
 		},
 	}
+end
+
+---| Compile.nvim |---
+do
+require 'compile'.setup {
+    language_commands = {
+        ['odin'] = {
+            build = 'odin build .',
+            run = 'odin run .',
+            test = 'odin test .',
+        },
+        ['zig'] = {
+            build = 'zig build',
+            run = 'zig build run',
+            test = 'zig build test',
+        },
+    },
+}
 end
 
 ---| Global Exports |---
