@@ -17,7 +17,7 @@ utils = {
 
 	vim_cmd = function(cmds)
 		for _, c in ipairs(cmds)do
-			vim.cmd(c)
+		vim.cmd(c)
 		end
 	end,
 
@@ -55,7 +55,7 @@ utils = {
 			:gsub('%.', '_')
 			:gsub('%s', ' ')
 			:gsub(' ', '_')
-			:lower() .. '_include_'
+		:lower() .. '_include_'
 
 		utils.vim_cmd {
 			'normal ggO#ifndef '..name,
@@ -348,7 +348,7 @@ do
 			'html', 'css', 'json', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
 			-- Other
 			'gitignore', 'gitcommit', 'diff', 'sql', 'awk', 'graphql', 'verilog',
-			 --]]
+			--]]
 		},
 
 		ignore_install = {'phpdoc', 'javadoc', 'v'},
@@ -608,7 +608,7 @@ do
 		return col ~= 0 and
 			vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
 				:sub(col, col)
-				:match('%s') == nil
+			:match('%s') == nil
 	end
 
 	cmp.setup {
@@ -702,20 +702,20 @@ end
 
 ---| Compile.nvim |---
 do
-require 'compile'.setup {
-    language_commands = {
-        ['odin'] = {
-            build = 'odin build .',
-            run = 'odin run .',
-            test = 'odin test .',
-        },
-        ['zig'] = {
-            build = 'zig build',
-            run = 'zig build run',
-            test = 'zig build test',
-        },
-    },
-}
+	require 'compile'.setup {
+		language_commands = {
+			['odin'] = {
+				build = 'odin build .',
+				run = 'odin run .',
+				test = 'odin test .',
+			},
+			['zig'] = {
+				build = 'zig build',
+				run = 'zig build run',
+				test = 'zig build test',
+			},
+		},
+	}
 end
 
 ---| Global Exports |---
