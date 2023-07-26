@@ -183,10 +183,10 @@ do
 		use 'nvim-treesitter/nvim-treesitter' -- Good highlighting, folding, etc.
 		use 'nvim-lua/plenary.nvim'           -- Utilities that some plugins depend on
 		use 'neovim/nvim-lspconfig'           -- LSP configurations
+		use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' -- Prettier LSP diagnostics
 		use 'nvim-telescope/telescope.nvim'   -- Extensible fuzzy finder
 		use 'marcs-feh/colors-22.nvim'        -- Colorscheme
 		use 'marcs-feh/compile.nvim'          -- Colorscheme
-		use 'nvim-tree/nvim-tree.lua'         -- File tree
 		use 'dcampos/nvim-snippy'             -- Snippet engine
 		use 'hrsh7th/nvim-cmp'                -- Completion
 		use 'hrsh7th/cmp-nvim-lsp'
@@ -216,7 +216,7 @@ do
 	map("n", "<leader>e", ":Telescope find_files<CR>")
 
 	-- Toggle file tree
-	map("n", "<leader>f", ":NvimTreeToggle<CR>")
+	-- map("n", "<leader>f", ":NvimTreeToggle<CR>")
 
 	-- Clear search highlight
 	map("n", "<leader>l", ":noh<CR>:echo<CR>")
@@ -387,7 +387,6 @@ do
 	add_autocmd('FileType', {
 		pattern  = 'odin',
 		callback = function()
-			local opts = {noremap = true, silent = true, buffer = 0}
 			set {
 				expandtab = false,
 				commentstring = '// %s',
@@ -496,7 +495,6 @@ end
 do
 	-- Enable a server by providing a config table or using `true`
 	-- Disable by not providing its name or by setting it to `false`/`nil`
-	-- server_name = config | bool (use default config)
 	local enabled_servers = {
 		-- Python
 		pyright = true,
@@ -505,10 +503,10 @@ do
 		-- Go
 		gopls = true,
 		-- Zig
-		zls = true,
+		zls = nil,
 		-- Svelte
 		svelte = true,
-		-- HTML Snippets
+		-- HTML
 		emmet_ls = true,
 		-- Bash
 		bashls = true,
@@ -644,62 +642,6 @@ do
 	}
 end
 
----| Nvim Tree |---
-do
-	require 'nvim-tree'.setup {
-		disable_netrw = true,
-		hijack_netrw = true,
-		sync_root_with_cwd = true,
-		view = {
-			cursorline = false,
-			width = 32,
-		},
-		renderer = {
-			indent_width = 2,
-			indent_markers = {
-				enable = true,
-			},
-			icons = {
-				webdev_colors = false,
-				modified_placement = 'before',
-				padding = ' ',
-				symlink_arrow = ' → ',
-				show = {
-					file = true,
-					folder = true,
-					folder_arrow = true,
-					git = false,
-					modified = true,
-				},
-				glyphs = {
-					default = '',
-					symlink = '',
-					bookmark = '',
-					modified = '*',
-					folder = {
-						arrow_closed = '',
-						arrow_open = '',
-						default = '',
-						open = '',
-						empty = '',
-						empty_open = '',
-						symlink = '',
-						symlink_open = '',
-					},
-				},
-			},
-		},
-		actions = {
-			use_system_clipboard = true,
-			change_dir = {
-				enable = true,
-				global = true,
-				restrict_above_cwd = false,
-			},
-		},
-	}
-end
-
 ---| Compile.nvim |---
 do
 	require 'compile'.setup {
@@ -718,7 +660,23 @@ do
 	}
 end
 
+---| LSP Lines |---
+do
+	require 'lsp_lines'.setup()
+	--- Give LSP lines control over virtual lines
+	vim.diagnostic.config{
+		virtual_text = false,
+		virtual_lines = {
+			only_current_line = true,
+		},
+	}
+end
+
 ---| Global Exports |---
 do
 	QuickAlign = utils.quick_align
+	function P(x)
+		print(vim.inspect(x))
+	end
 end
+
