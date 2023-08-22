@@ -227,8 +227,8 @@ do
 	-- Open file to edit
 	map("n", "<leader>e", ":Telescope find_files<CR>")
 
-	-- Toggle file tree
-	-- map("n", "<leader>f", ":NvimTreeToggle<CR>")
+	-- Toggle Netrw
+	map("n", "<leader>f", ":Lexplore<CR>")
 
 	-- Clear search highlight
 	map("n", "<leader>l", ":noh<CR>:echo<CR>")
@@ -246,6 +246,10 @@ do
 	-- Split windows
 	map("n", "<leader>sh", ":split<CR>")
 	map("n", "<leader>sv", ":vsplit<CR>")
+
+	-- Alternative page up and down
+	map("n", "<C-k>", "<C-u>")
+	map("n", "<C-j>", "<C-d>")
 
 	-- Expand window
 	map("n", "<leader>F", ":resize<CR>:vertical resize<CR>")
@@ -407,11 +411,29 @@ do
 		end
 	})
 
+	-- GLSL
+	add_autocmd('FileType', {
+		pattern = 'glsl',
+		callback = function()
+			set {
+				commentstring = '// %s',
+			}
+		end,
+	})
+
 	-- No autopairs
 	add_autocmd('FileType', {
 		pattern = 'bash,zsh,sh,fish,ps1,markdown',
 		callback = function()
 			b.minipairs_disable = true
+		end
+	})
+
+	-- Netrw
+	add_autocmd('FileType', {
+		pattern = 'netrw',
+		callback = function()
+			map('n', 'cd', ':cd %<CR>', { buffer = true, silent = true, noremap = true })
 		end
 	})
 
@@ -512,6 +534,8 @@ do
 		pyright = true,
 		-- Odin
 		ols = true,
+		-- GLSL
+		glslls = true,
 		-- Go
 		gopls = true,
 		-- Zig
@@ -549,7 +573,7 @@ do
 		map('n', 'gd', vim.lsp.buf.definition, opts)
 		map('n', 'K', vim.lsp.buf.hover, opts)
 		map('n', 'gi', vim.lsp.buf.implementation, opts)
-		map('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+		map('n', '<leader>vk', vim.lsp.buf.signature_help, opts)
 		map('n', '<leader>vrn', vim.lsp.buf.rename, opts)
 		map('n', '<leader>vca', vim.lsp.buf.code_action, opts)
 		map('n', '<leader>r', vim.lsp.buf.references, opts)
