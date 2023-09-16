@@ -537,15 +537,10 @@ do
 		pyright = true,
 		-- Odin
 		ols = true,
-<<<<<<< Updated upstream
-		-- GLSL
-		glslls = true,
-=======
 		-- CSS
 		cssls = {
 			capabilities = capabilities,
 		},
->>>>>>> Stashed changes
 		-- Go
 		gopls = true,
 		-- Zig
