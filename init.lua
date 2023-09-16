@@ -692,6 +692,11 @@ do
 				run = 'zig build run',
 				test = 'zig build test',
 			},
+			['cpp'] = {
+				build = 'make build',
+				run = 'make run',
+				test = 'make test',
+			},
 		},
 	}
 end
