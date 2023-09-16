@@ -527,6 +527,9 @@ end
 
 ---| LSP |---
 do
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 	-- Enable a server by providing a config table or using `true`
 	-- Disable by not providing its name or by setting it to `false`/`nil`
 	local enabled_servers = {
@@ -534,8 +537,15 @@ do
 		pyright = true,
 		-- Odin
 		ols = true,
+<<<<<<< Updated upstream
 		-- GLSL
 		glslls = true,
+=======
+		-- CSS
+		cssls = {
+			capabilities = capabilities,
+		},
+>>>>>>> Stashed changes
 		-- Go
 		gopls = true,
 		-- Zig
@@ -716,8 +726,6 @@ end
 ---| Global Exports |---
 do
 	QuickAlign = utils.quick_align
-	function P(x)
-		print(vim.inspect(x))
-	end
+	function P(x) print(vim.inspect(x)) end
 end
 
