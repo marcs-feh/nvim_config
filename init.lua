@@ -17,7 +17,7 @@ utils = {
 
 	vim_cmd = function(cmds)
 		for _, c in ipairs(cmds)do
-		vim.cmd(c)
+			vim.cmd(c)
 		end
 	end,
 
