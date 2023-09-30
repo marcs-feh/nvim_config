@@ -472,11 +472,10 @@ do
 	add_autocmd('FileType', {
 		pattern  = 'python',
 		callback = function()
-			g.python_recommended_style = 0
 			set {
 				expandtab  = true,
-				tabstop    = 2,
-				shiftwidth = 2,
+				tabstop    = 4,
+				shiftwidth = 4,
 			}
 		end,
 	})
@@ -544,7 +543,7 @@ do
 		-- Go
 		gopls = true,
 		-- Zig
-		zls = nil,
+		zls = true,
 		-- Svelte
 		svelte = true,
 		-- HTML
