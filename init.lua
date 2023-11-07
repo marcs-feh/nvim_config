@@ -195,16 +195,10 @@ do
 		use(github 'nvim-treesitter/nvim-treesitter') -- Good highlighting, folding, etc.
 		use(github 'nvim-lua/plenary.nvim')           -- Utilities that some plugins depend on
 		use(github 'neovim/nvim-lspconfig')           -- LSP configurations
-		use(sourcehut '~whynothugo/lsp_lines.nvim')   -- Prettier LSP diagnostics
 		use(github 'nvim-telescope/telescope.nvim')   -- Extensible fuzzy finder
 		use(github 'marcs-feh/colors-22.nvim')        -- Colorscheme
 		use(github 'marcs-feh/compile.nvim')          -- Compile code with a keybinding
-		use(github 'dcampos/nvim-snippy')             -- Snippet engine (I don't use it but cmp wants one)
-		use(github 'hrsh7th/nvim-cmp')                -- Completion
-		use(github 'hrsh7th/cmp-nvim-lsp')
-		use(github 'hrsh7th/cmp-buffer')
-		use(github 'hrsh7th/cmp-path')
-		use(github 'hrsh7th/cmp-cmdline')
+		use(sourcehut '~whynothugo/lsp_lines.nvim')   -- Prettier LSP diagnostics
 		if packer_bootstrap then packer.sync() end
 	end)
 
@@ -223,6 +217,7 @@ do
 
 	-- Save
 	map("n", "<C-s>", ":w<CR>")
+	map("i", "<C-s>", "<ESC>:w<CR>")
 
 	-- Open file to edit
 	map("n", "<leader>e", ":Telescope find_files<CR>")
@@ -288,8 +283,8 @@ do
 	map("n", "<leader><C-x>", ":tabclose<CR>")
 
 	-- Mini.completion (uncomment if not using cmp)
-	-- map("i", "<Tab>",   [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true } )
-	-- map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
+	map("i", "<Tab>",   [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true } )
+	map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
 
 	-- Stay in indent mode
 	map("v", "<", "<gv")
@@ -335,6 +330,39 @@ do
 	require 'colors-22'.setup {
 		transparent = true,
 		bright_cursor_line = false,
+		--[[
+		colors = {
+			-- Main colors
+			bg        = '#000000',
+			bg_alt    = '#222222',
+			bg_br     = '#444444',
+			bg_br_alt = '#666666',
+			fg        = '#eeeeee',
+			fg_alt    = '#dddddd',
+			fg_br     = '#fcfcfc',
+			fg_br_alt = '#ffffff',
+
+			-- Highlights
+			type         = '#20aaed',
+			type_alt     = '#eeeeee',
+			reserved     = '#ed2055',
+			reserved_alt = '#ed8055',
+			id           = '#eeeeee',
+			id_alt       = '#eeeeee',
+			literal      = '#eeeeee',
+			literal_alt  = '#eeeeee',
+			func         = '#eeeeee',
+			func_alt     = '#eeeeee',
+			str          = '#45c510',
+			str_alt      = '#50dd20',
+
+			-- Diagnostic
+			error = '#d83e33',
+			warn  = '#f2ba41',
+			hint  = '#cda1ac',
+			info  = '#c8889f',
+		}
+		--]]
 	}
 end
 
@@ -408,6 +436,20 @@ do
 				commentstring = '// %s',
 			}
 			b.minipairs_disable = true
+		end
+	})
+
+	-- TODO: Remove when real typst support is added
+	-- Typst
+	add_autocmd({ 'BufEnter', 'BufNew' }, {
+		pattern  = '*.typ',
+		callback = function()
+			set {
+				filetype = 'markdown',
+				expandtab = false,
+				commentstring = '// %s',
+			}
+			-- b.minipairs_disable = true
 		end
 	})
 
@@ -537,9 +579,9 @@ do
 		-- Odin
 		ols = true,
 		-- CSS
-		cssls = {
-			capabilities = capabilities,
-		},
+		-- cssls = {
+		-- 	capabilities = capabilities,
+		-- },
 		-- Go
 		gopls = true,
 		-- Zig
@@ -619,12 +661,16 @@ do
 		mappings = {
 			comment = '<leader>c',
 			comment_line = '<leader>c',
+			comment_visual = '<leader>c',
 		},
 	}
 
 	-- Auto pairs
 	require 'mini.pairs'.setup()
 	vim.g.minipairs_disable = false -- Disable by default
+
+	-- Completion
+	require 'mini.completion'.setup{}
 end
 
 ---| Telescope |---
@@ -634,9 +680,52 @@ do
 
 	map('n', '<leader>e', tele.find_files )
 	map('n', '<C-f>', tele.live_grep )
+
+end
+
+---| Compile.nvim |---
+do
+	require 'compile'.setup {
+		language_commands = {
+			['odin'] = {
+				build = 'odin build .',
+				run = 'odin run .',
+				test = 'odin test .',
+			},
+			['zig'] = {
+				build = 'zig build',
+				run = 'zig build run',
+				test = 'zig build test',
+			},
+			['cpp'] = {
+				build = 'make build',
+				run = 'make run',
+				test = 'make test',
+			},
+		},
+	}
+end
+
+---| LSP Lines |---
+do
+	require 'lsp_lines'.setup()
+	--- Give LSP lines control over virtual lines
+	vim.diagnostic.config{
+		virtual_text = false,
+		virtual_lines = {
+			only_current_line = true,
+		},
+	}
+end
+
+---| Global Exports |---
+do
+	QuickAlign = utils.quick_align
+	function P(x) print(vim.inspect(x)) end
 end
 
 ---| Cmp |---
+--[[
 do
 	local cmp = require 'cmp'
 
@@ -681,45 +770,12 @@ do
 		})
 	}
 end
+--]]
 
----| Compile.nvim |---
-do
-	require 'compile'.setup {
-		language_commands = {
-			['odin'] = {
-				build = 'odin build .',
-				run = 'odin run .',
-				test = 'odin test .',
-			},
-			['zig'] = {
-				build = 'zig build',
-				run = 'zig build run',
-				test = 'zig build test',
-			},
-			['cpp'] = {
-				build = 'make build',
-				run = 'make run',
-				test = 'make test',
-			},
-		},
-	}
-end
 
----| LSP Lines |---
-do
-	require 'lsp_lines'.setup()
-	--- Give LSP lines control over virtual lines
-	vim.diagnostic.config{
-		virtual_text = false,
-		virtual_lines = {
-			only_current_line = true,
-		},
-	}
-end
-
----| Global Exports |---
-do
-	QuickAlign = utils.quick_align
-	function P(x) print(vim.inspect(x)) end
-end
-
+	-- use(github 'dcampos/nvim-snippy')             -- Snippet engine (I don't use it but cmp wants one)
+	-- use(github 'hrsh7th/nvim-cmp')                -- Completion
+	-- use(github 'hrsh7th/cmp-nvim-lsp')
+	-- use(github 'hrsh7th/cmp-buffer')
+	-- use(github 'hrsh7th/cmp-path')
+	-- use(github 'hrsh7th/cmp-cmdline')
