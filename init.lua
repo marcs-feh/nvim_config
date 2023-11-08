@@ -41,8 +41,7 @@ utils = {
 		local lines = vim.api.nvim_buf_get_lines(buf_num, from - 1, to, true)
 
 		local new_lines = MiniAlign.align_strings(lines,
-			{ split_pattern = pattern, justify_side = 'left' }
-		)
+			{ split_pattern = pattern, justify_side = 'left' })
 		vim.api.nvim_buf_set_lines(buf_num, from - 1, to, true, new_lines)
 	end,
 
@@ -514,6 +513,7 @@ do
 	add_autocmd('FileType', {
 		pattern  = 'python',
 		callback = function()
+			b.minipairs_disable = true
 			set {
 				expandtab  = true,
 				tabstop    = 4,
@@ -539,26 +539,14 @@ do
 		end
 	})
 
-	-- Rust, I *really* hate how rust projects insist on objectively bad indentation for accessibility
-	add_autocmd('FileType', {
-		pattern = 'rust',
-		callback = function()
-			set {
-				expandtab  = false,
-			}
-		end,
-	})
-
-	-- Zig, another language that shoves bad indentation down everyone's throat.
+	-- Zig
 	add_autocmd('FileType', {
 		pattern = 'zig',
 		callback = function()
 			g.zig_fmt_autosave = 0
+			b.minipairs_disable = true
 			set {
 				commentstring = '// %s',
-				expandtab     = true,
-				tabstop       = 4,
-				shiftwidth    = 4,
 			}
 		end
 	})
@@ -698,6 +686,11 @@ do
 				test = 'zig build test',
 			},
 			['cpp'] = {
+				build = 'make build',
+				run = 'make run',
+				test = 'make test',
+			},
+			['c'] = {
 				build = 'make build',
 				run = 'make run',
 				test = 'make test',
