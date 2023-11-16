@@ -1,3 +1,5 @@
 pack/*
+lazy/*
 *.so
 theme/*
+

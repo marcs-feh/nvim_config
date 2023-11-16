@@ -159,48 +159,44 @@ do
 	vim.g.netrw_banner  = 0
 	vim.g.netrw_hide    = 1
 	vim.g.netrw_winsize = 30
-
 end
 
 ---| Plugins |---
 do
-	local ensure_packer = function()
-		local fn = vim.fn
-		local packer_url = 'https://github.com/wbthomason/packer.nvim'
-		local install_path = fn.stdpath('config')..'/pack/packer/start/packer.nvim'
-		if fn.empty(fn.glob(install_path)) > 0 then
-			fn.system({'git', 'clone', '--depth', '1', packer_url, install_path})
-			vim.cmd [[packadd packer.nvim]]
-			return true
-		end
-		return false
+	local lazypath = vim.fn.stdpath("config") .. "/lazy/lazy.nvim"
+	if not vim.loop.fs_stat(lazypath) then
+	  vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	  })
+	end
+	vim.opt.runtimepath:prepend(lazypath)
+
+	local github = function(name)
+		return { url = ('http://github.com/%s'):format(name) }
 	end
 
-	local packer_bootstrap = ensure_packer()
-	local packer = require 'packer'
+	local sourcehut = function(name)
+		return { url = ('http://git.sr.ht/%s'):format(name) }
+	end
 
-	packer.init {
-		package_root = vim.fn.stdpath('config')..'/pack',
-		compile_path = vim.fn.stdpath('config')..'/pack/packer/packer_compiled.lua',
+	local plugins = {
+		github 'wbthomason/packer.nvim',          -- Package manager
+		github 'echasnovski/mini.nvim',           -- Many small neovim extensions
+		github 'nvim-treesitter/nvim-treesitter', -- Good highlighting, folding, etc.
+		github 'nvim-lua/plenary.nvim',           -- Utilities that some plugins depend on
+		github 'neovim/nvim-lspconfig',           -- LSP configurations
+		github 'nvim-telescope/telescope.nvim',   -- Extensible fuzzy finder
+		github 'marcs-feh/colors-22.nvim',        -- Colorscheme
+		github 'marcs-feh/compile.nvim',          -- Compile code with a keybinding
+		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
 
-	local github = function(repo) return 'https://github.com/'..repo end
-	-- local gitlab = function(repo) return 'https://gitlab.com/'..repo end
-	local sourcehut = function(repo) return 'https://git.sr.ht/'..repo end
-
-	packer.startup(function(use)
-		use(github 'wbthomason/packer.nvim')          -- Package manager
-		use(github 'echasnovski/mini.nvim')           -- Many small neovim extensions
-		use(github 'nvim-treesitter/nvim-treesitter') -- Good highlighting, folding, etc.
-		use(github 'nvim-lua/plenary.nvim')           -- Utilities that some plugins depend on
-		use(github 'neovim/nvim-lspconfig')           -- LSP configurations
-		use(github 'nvim-telescope/telescope.nvim')   -- Extensible fuzzy finder
-		use(github 'marcs-feh/colors-22.nvim')        -- Colorscheme
-		use(github 'marcs-feh/compile.nvim')          -- Compile code with a keybinding
-		use(sourcehut '~whynothugo/lsp_lines.nvim')   -- Prettier LSP diagnostics
-		if packer_bootstrap then packer.sync() end
-	end)
-
+	require 'lazy'.setup(plugins, {})
 end
 
 ---| Keybindings |---
@@ -765,10 +761,3 @@ do
 end
 --]]
 
-
-	-- use(github 'dcampos/nvim-snippy')             -- Snippet engine (I don't use it but cmp wants one)
-	-- use(github 'hrsh7th/nvim-cmp')                -- Completion
-	-- use(github 'hrsh7th/cmp-nvim-lsp')
-	-- use(github 'hrsh7th/cmp-buffer')
-	-- use(github 'hrsh7th/cmp-path')
-	-- use(github 'hrsh7th/cmp-cmdline')
