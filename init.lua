@@ -163,7 +163,8 @@ end
 
 ---| Plugins |---
 do
-	local lazypath = vim.fn.stdpath("config") .. "/lazy/lazy.nvim"
+	local lazyroot = vim.fn.stdpath("config") .. "/lazy"
+	local lazypath = lazyroot .. "/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then
 	  vim.fn.system({
 		"git",
@@ -196,7 +197,10 @@ do
 		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
 
-	require 'lazy'.setup(plugins, {})
+	require 'lazy'.setup(plugins, {
+		root = lazyroot,
+		ui = { icons = { cmd = "⌘", config = "🛠", event = "📅", ft = "📂", init = "⚙", keys = "🗝", plugin = "🔌", runtime = "💻", require = "🌙", source = "📄", start = "🚀", task = "📌", lazy = "💤 ", }, },
+	})
 end
 
 ---| Keybindings |---
