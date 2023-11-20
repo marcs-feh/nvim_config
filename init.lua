@@ -81,6 +81,8 @@ do
 		clipboard = "unnamedplus",
 		-- Command line height
 		cmdheight = 1,
+		-- Don't lock neovim if too much text is printed
+		more = false,
 		-- Mostly just for cmp
 		completeopt = { "menuone", "noselect" },
 		-- So that `` is visible in markdown files
