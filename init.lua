@@ -370,15 +370,14 @@ do
 	local ts_config = require 'nvim-treesitter.configs'
 
 	ts_config.setup {
-		sync_install = false, -- Enable if you have <8GB RAM, will take much longer to compile
+		sync_install = true, -- Enable if you have <8GB RAM, will take much longer to compile
 		ensure_installed = {
-			--[[
 			-- General purpose (Systems programming)
-			'c', 'cpp', 'odin', 'zig', 'rust',
+			'c', 'cpp', 'odin', 'zig', 'rust', 'ada',
 			-- General purpose (Memory managed)
 			'java', 'kotlin', 'c_sharp', 'go', 'dart', 'python', 'ruby',
 			-- General purpose (Functional)
-			'scala', 'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'nix',
+			'scala', 'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'nix', 'commonlisp',
 			-- Web dev
 			'javascript', 'typescript', 'php',
 			-- Graphics and GPU accel.
@@ -388,9 +387,9 @@ do
 			-- Build systems
 			'make', 'ninja', 'cmake', 'meson',
 			-- Markup and configuration
-			'html', 'css', 'json', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
+			'html', 'xml', 'css', 'json', 'jsonc', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
 			-- Other
-			'gitignore', 'gitcommit', 'diff', 'sql', 'awk', 'graphql', 'verilog',
+			'gitignore', 'csv', 'gitcommit', 'diff', 'sql', 'awk', 'graphql', 'verilog',
 			--]]
 		},
 
@@ -435,6 +434,7 @@ do
 				commentstring = '// %s',
 			}
 			b.minipairs_disable = true
+			vim.cmd [[TSDisable indent]] -- Indentation is kinda broken in odin-treesitter
 		end
 	})
 
