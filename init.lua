@@ -391,7 +391,7 @@ do
 			-- Markup and configuration
 			'html', 'xml', 'css', 'json', 'jsonc', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
 			-- Other
-			'gitignore', 'csv', 'gitcommit', 'diff', 'sql', 'awk', 'graphql', 'verilog',
+			'gitignore', 'csv', 'diff', 'sql', 'awk', 'graphql', 'verilog',
 			--]]
 		},
 
@@ -423,6 +423,8 @@ do
 		callback = function()
 			set {
 				expandtab = true,
+				tabstop = 2,
+				shiftwidth = 2,
 			}
 		end
 	})
@@ -436,7 +438,7 @@ do
 				commentstring = '// %s',
 			}
 			b.minipairs_disable = true
-			vim.cmd [[TSDisable indent]] -- Indentation is kinda broken in odin-treesitter
+			-- vim.cmd [[TSDisable indent]] -- Indentation is kinda broken in odin-treesitter
 		end
 	})
 
@@ -455,13 +457,16 @@ do
 	})
 
 	-- GLSL
-	add_autocmd('FileType', {
-		pattern = 'glsl',
+	add_autocmd({ 'BufEnter', 'BufNew' }, {
+		pattern  = { '*.glsl', '*.vert', '*.frag', '*.tesc',
+			          '*.tese', '*.geom', '*.comp', },
 		callback = function()
 			set {
+				filetype = 'glsl',
 				commentstring = '// %s',
 			}
-		end,
+			b.minipairs_disable = true
+		end
 	})
 
 	-- No autopairs
@@ -580,8 +585,6 @@ do
 		svelte = true,
 		-- HTML
 		emmet_ls = true,
-		-- Bash
-		bashls = true,
 		-- Rust
 		rust_analyzer = true,
 		-- C/C++
@@ -641,7 +644,9 @@ do
 	require 'mini.align'.setup()
 
 	-- Statusline
-	require 'mini.statusline'.setup()
+	require 'mini.statusline'.setup{
+		use_icons = false,
+	}
 
 	-- Tabline
 	require 'mini.tabline'.setup()
@@ -718,52 +723,4 @@ do
 	QuickAlign = utils.quick_align
 	function P(x) print(vim.inspect(x)) end
 end
-
----| Cmp |---
---[[
-do
-	local cmp = require 'cmp'
-
-	local has_words_before = function()
-		unpack = unpack or table.unpack
-		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-		return col ~= 0 and
-			vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
-				:sub(col, col)
-			:match('%s') == nil
-	end
-
-	cmp.setup {
-		snippet = {
-			expand = function(args)
-				require('snippy').expand_snippet(args.body)
-			end,
-		},
-		mapping = cmp.mapping.preset.insert({
-			['<C-b>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			['<C-Space>'] = cmp.mapping.complete(),
-			['<C-e>'] = cmp.mapping.abort(),
-			['<Tab>'] = function(fallback)
-				if not cmp.select_next_item() then
-					if vim.bo.buftype ~= 'prompt' and has_words_before() then
-						cmp.complete()
-					else
-						fallback()
-					end
-				end
-			end,
-			['<CR>'] = cmp.mapping.confirm({ select = false }),
-		}),
-		sources = cmp.config.sources(
-			{
-				{ name = 'nvim_lsp' },
-				{ name = 'snippy' },
-			},
-			{
-				{ name = 'buffer' },
-		})
-	}
-end
---]]
 
