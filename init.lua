@@ -53,6 +53,7 @@ utils = {
 			:gsub('.*/', '')
 			:gsub('%.', '_')
 			:gsub('%s', ' ')
+			:gsub('%-', '_')
 			:gsub(' ', '_')
 		:lower() .. '_include_'
 
@@ -372,7 +373,7 @@ do
 	local ts_config = require 'nvim-treesitter.configs'
 
 	ts_config.setup {
-		sync_install = true, -- Enable if you have <8GB RAM, will take much longer to compile
+		sync_install = false, -- Enable if you have <8GB RAM, will take much longer to compile
 		ensure_installed = {
 			-- General purpose (Systems programming)
 			'c', 'cpp', 'odin', 'zig', 'rust', 'ada',
@@ -573,10 +574,8 @@ do
 		pyright = true,
 		-- Odin
 		ols = true,
-		-- CSS
-		-- cssls = {
-		-- 	capabilities = capabilities,
-		-- },
+		-- OCaml
+		ocamlls = true,
 		-- Go
 		gopls = true,
 		-- Zig
@@ -585,8 +584,10 @@ do
 		svelte = true,
 		-- HTML
 		emmet_ls = true,
+		-- Bash
+		bashls = false,
 		-- Rust
-		rust_analyzer = true,
+		rust_analyzer = false,
 		-- C/C++
 		clangd = {
 			cmd = {'clangd', '-header-insertion=never'}

@@ -5,7 +5,7 @@
   "lsp_lines.nvim": { "branch": "main", "commit": "cf2306dd332e34a3e91075b40bdd4f6db824b2ee" },
   "mini.nvim": { "branch": "main", "commit": "ea1af8c7d5e72148cae8a04e9887322a53fe66cf" },
   "nvim-lspconfig": { "branch": "master", "commit": "9099871a7c7e1c16122e00d70208a2cd02078d80" },
-  "nvim-treesitter": { "branch": "master", "commit": "7d0b4756aba3b220d38ec0443c6cc10944060dd7" },
+  "nvim-treesitter": { "branch": "master", "commit": "7a2c6211d6f550988fccd8800de8426d5e480a2d" },
   "packer.nvim": { "branch": "master", "commit": "ea0cc3c59f67c440c5ff0bbe4fb9420f4350b9a3" },
   "plenary.nvim": { "branch": "master", "commit": "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
   "telescope.nvim": { "branch": "master", "commit": "e0651458f2ced647f3ff3c89d5663244b3cf45af" }
