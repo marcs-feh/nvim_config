@@ -135,10 +135,16 @@ syn match c3ComptimeKw display "\$vatype"
 hi def link c3Number       Number
 hi def link c3Float        Number
 hi def link c3Identifier   Identifier
-hi def link c3Attribute    StorageClass
 hi def link c3ComptimeId   Identifier
-hi def link c3UserAttr     Tag
-hi def link c3BuiltinAttr  Tag
+
+if hlexists('@namespace')
+  hi def link c3UserAttr     @namespace
+  hi def link c3BuiltinAttr  @namespace
+else
+  hi def link c3UserAttr     Special
+  hi def link c3BuiltinAttr  Special
+endif
+
 hi def link c3Function     Function
 hi def link c3Function     Macro
 hi def link c3BuiltinType  Type
