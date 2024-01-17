@@ -1,9 +1,10 @@
-" if exists("b:current_syntax")
-"   finish
-" endif
+if exists("b:current_syntax")
+  finish
+endif
 
 syn match c3Identifier  display "\v<_*[a-z][A-Za-z0-9_]*>"
 syn match c3Function    display "\zs\(\w*\)*\s*\ze("
+syn match c3Namespace   display "\zs\w\ze::"
 syn match c3Macro       display "@\zs\(\w*\)*\s*\ze("
 syn match c3UserType    display "_*[A-Z][a-zA-Z0-9_]\+"
 syn match c3UserAttr    display "@_*[A-Z][a-zA-Z0-9_]\+"
@@ -140,9 +141,11 @@ hi def link c3ComptimeId   Identifier
 if hlexists('@namespace')
   hi def link c3UserAttr     @namespace
   hi def link c3BuiltinAttr  @namespace
+  hi def link c3Namespace    @namespace
 else
   hi def link c3UserAttr     Special
   hi def link c3BuiltinAttr  Special
+  hi def link c3Namespace    Type
 endif
 
 hi def link c3Function     Function

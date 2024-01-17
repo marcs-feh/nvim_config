@@ -373,7 +373,7 @@ do
 	local ts_config = require 'nvim-treesitter.configs'
 
 	ts_config.setup {
-		sync_install = false, -- Enable if you have <8GB RAM, will take much longer to compile
+		sync_install = true, -- Enable if you have <8GB RAM, will take much longer to compile
 		ensure_installed = {
 			-- General purpose (Systems programming)
 			'c', 'cpp', 'odin', 'zig', 'rust', 'ada',
@@ -423,8 +423,8 @@ do
 		pattern  = 'markdown,ninja,scheme,org,python,nim,lisp,sml,clojure,vim',
 		callback = function()
 			set {
-				expandtab = true,
-				tabstop = 2,
+				expandtab  = true,
+				tabstop    = 2,
 				shiftwidth = 2,
 			}
 		end
@@ -439,7 +439,8 @@ do
 				commentstring = '// %s',
 			}
 			b.minipairs_disable = true
-			-- vim.cmd [[TSDisable indent]] -- Indentation is kinda broken in odin-treesitter
+			-- Indentation is kinda broken in odin-treesitter
+			-- vim.cmd [[TSDisable indent]]
 		end
 	})
 
@@ -450,10 +451,22 @@ do
 		callback = function()
 			set {
 				filetype = 'markdown',
-				expandtab = false,
 				commentstring = '// %s',
 			}
 			-- b.minipairs_disable = true
+		end
+	})
+
+	-- C3
+	add_autocmd({ 'BufEnter', 'BufNew' }, {
+		pattern  = '*.c3',
+		callback = function()
+			set {
+				filetype = 'c3',
+				expandtab = false,
+				commentstring = '// %s',
+			}
+			b.minipairs_disable = true
 		end
 	})
 
@@ -681,12 +694,13 @@ end
 
 ---| Compile.nvim |---
 do
+	local odin_cmd = 'odin %s . -debug -use-separate-modules -o:minimal -thread-count:$(nproc)'
 	require 'compile'.setup {
 		language_commands = {
 			['odin'] = {
-				build = 'odin build .',
-				run = 'odin run .',
-				test = 'odin test .',
+				build = odin_cmd:format('build'),
+				run = odin_cmd:format('run'),
+				test = odin_cmd:format('test'),
 			},
 			['zig'] = {
 				build = 'zig build',
