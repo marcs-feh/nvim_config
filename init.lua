@@ -373,18 +373,18 @@ do
 	local ts_config = require 'nvim-treesitter.configs'
 
 	ts_config.setup {
-		sync_install = true, -- Enable if you have <8GB RAM, will take much longer to compile
+		sync_install = false, -- Enable if you have <8GB RAM, will take much longer to compile
 		ensure_installed = {
 			-- General purpose (Systems programming)
 			'c', 'cpp', 'odin', 'zig', 'rust', 'ada',
 			-- General purpose (Memory managed)
-			'java', 'kotlin', 'c_sharp', 'go', 'dart', 'python', 'ruby',
+			'java', 'c_sharp', 'go', 'python', 'ruby',
 			-- General purpose (Functional)
-			'scala', 'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'nix', 'commonlisp',
+			'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'commonlisp',
 			-- Web dev
 			'javascript', 'typescript', 'php',
 			-- Graphics and GPU accel.
-			'glsl', 'cuda',
+			'glsl', 'cuda', 'hlsl',
 			-- Scripting
 			'lua', 'scheme', 'vim', 'fish', 'bash', 'perl',
 			-- Build systems
@@ -392,7 +392,7 @@ do
 			-- Markup and configuration
 			'html', 'xml', 'css', 'json', 'jsonc', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
 			-- Other
-			'gitignore', 'csv', 'diff', 'sql', 'awk', 'graphql', 'verilog',
+			'gitignore', 'csv', 'diff', 'sql', 'awk', 'graphql', 'verilog', 'nix',
 			--]]
 		},
 
