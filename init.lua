@@ -288,6 +288,9 @@ do
 	map("i", "<Tab>",   [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true } )
 	map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
 
+	-- Insert block
+	map("i", "<C-b>", "{}<ESC>i<CR><ESC>O")
+
 	-- Stay in indent mode
 	map("v", "<", "<gv")
 	map("v", ">", ">gv")
