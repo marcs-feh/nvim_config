@@ -698,7 +698,7 @@ end
 ---| Compile.nvim |---
 do
 	-- Mild optimizations, made to be quick to compile and run locally
-	local odin_cmd = "odin %s . -collection:shared=. -debug -use-separate-modules -o:minimal -thread-count:$(nproc) -reloc-mode:pic -microarch:native"
+	local odin_cmd = "odin %s . -collection:shared=. -debug -o:none -reloc-mode:pic -thread-count:$(nproc) -microarch:native"
 	require 'compile'.setup {
 		language_commands = {
 			['odin'] = {
