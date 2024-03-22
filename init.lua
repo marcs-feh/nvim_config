@@ -411,6 +411,7 @@ do
 		},
 	}
 
+
 end
 
 ---| Autocmds |---
@@ -443,7 +444,7 @@ do
 			}
 			b.minipairs_disable = true
 			-- Indentation is kinda broken in odin-treesitter
-			-- vim.cmd [[TSDisable indent]]
+			vim.cmd [[TSBufDisable indent]]
 		end
 	})
 
