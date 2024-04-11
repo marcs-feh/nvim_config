@@ -333,33 +333,41 @@ end
 ---| Colorscheme |---
 do
 	require 'colors-22'.setup {
-		transparent = true,
+		transparent = false,
 		bright_cursor_line = false,
 		--[[
 		colors = {
 			-- Main colors
-			bg        = '#000000',
-			bg_alt    = '#222222',
-			bg_br     = '#444444',
-			bg_br_alt = '#666666',
-			fg        = '#eeeeee',
-			fg_alt    = '#dddddd',
-			fg_br     = '#fcfcfc',
-			fg_br_alt = '#ffffff',
+			bg        = '#1b1b1b',
+			bg_alt    = '#000000',
+
+			bg_br     = '#000000',
+			bg_br_alt = '#000000',
+
+			fg        = '#ece7dd',
+			fg_alt    = '#000000', -- ?
+
+			fg_br     = '#ff00ff',
+			fg_br_alt = '#ffff00',
 
 			-- Highlights
-			type         = '#20aaed',
-			type_alt     = '#eeeeee',
-			reserved     = '#ed2055',
-			reserved_alt = '#ed8055',
-			id           = '#eeeeee',
-			id_alt       = '#eeeeee',
-			literal      = '#eeeeee',
-			literal_alt  = '#eeeeee',
-			func         = '#eeeeee',
-			func_alt     = '#eeeeee',
-			str          = '#45c510',
-			str_alt      = '#50dd20',
+			type         = '#5cb1d9',
+			type_alt     = '#57cdaa',
+
+			reserved     = '#f16c72',
+			reserved_alt = '#000000',
+
+			id           = '#ece7dd',
+			id_alt       = '#e1c36a',
+
+			literal      = '#f86784',
+			literal_alt  = '#f86784',
+
+			func         = '#afd759',
+			func_alt     = '#afd759',
+
+			str          = '#99c560',
+			str_alt      = '#99c560',
 
 			-- Diagnostic
 			error = '#d83e33',
@@ -704,23 +712,23 @@ do
 		language_commands = {
 			['odin'] = {
 				build = odin_cmd:format('build'),
-				run = odin_cmd:format('run'),
-				test = odin_cmd:format('test'),
+				run   = odin_cmd:format('run'),
+				test  = odin_cmd:format('test'),
 			},
 			['zig'] = {
 				build = 'zig build',
-				run = 'zig build run',
-				test = 'zig build test',
+				run   = 'zig build run',
+				test  = 'zig build test',
 			},
 			['cpp'] = {
 				build = 'make build',
-				run = 'make run',
-				test = 'make test',
+				run   = 'make run',
+				test  = 'make test',
 			},
 			['c'] = {
 				build = 'make build',
-				run = 'make run',
-				test = 'make test',
+				run   = 'make run',
+				test  = 'make test',
 			},
 		},
 	}
