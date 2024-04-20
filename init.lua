@@ -306,7 +306,6 @@ do
 		vim.b.minipairs_disable = not b
 	end)
 
-	--'<ESC>:lua QuickAlign(0, nil)<CR>')
 	-- Move text
 	map("x", "<C-j>", ":move '>+1<cr>gv-gv")
 	map("x", "<C-k>", ":move '<-2<cr>gv-gv")
@@ -650,6 +649,7 @@ do
 		map('n', '<leader>D', ':Telescope diagnostics<CR>')
 		map('n', '<leader>vS', ':LspStop<CR>')
 		map('n', '<leader>vR', ':LspRestart<CR>')
+		map('n', '<leader>ve', vim.diagnostic.setqflist)
 	end
 
 	for server, cfg in pairs(enabled_servers) do
