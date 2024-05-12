@@ -461,7 +461,7 @@ do
 
 	-- TODO: Remove when real typst support is added
 	-- Typst
-	add_autocmd({ 'BufEnter', 'BufNew' }, {
+	add_autocmd({ 'BufEnter' }, {
 		pattern  = '*.typ',
 		callback = function()
 			set {
@@ -472,24 +472,12 @@ do
 		end
 	})
 
-	-- C3
-	add_autocmd({ 'BufEnter', 'BufNew' }, {
-		pattern  = '*.c3',
-		callback = function()
-			set {
-				filetype = 'c3',
-				expandtab = false,
-				commentstring = '// %s',
-			}
-			b.minipairs_disable = true
-		end
-	})
-
 	-- GLSL
-	add_autocmd({ 'BufEnter', 'BufNew' }, {
+	add_autocmd({ 'BufEnter' }, {
 		pattern  = { '*.glsl', '*.vert', '*.frag', '*.tesc',
 			          '*.tese', '*.geom', '*.comp', },
 		callback = function()
+			print(vim.api.nvim_get_current_buf())
 			set {
 				filetype = 'glsl',
 				commentstring = '// %s',
