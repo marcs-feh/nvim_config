@@ -190,7 +190,6 @@ do
 	end
 
 	local plugins = {
-		github 'wbthomason/packer.nvim',          -- Package manager
 		github 'echasnovski/mini.nvim',           -- Many small neovim extensions
 		github 'nvim-treesitter/nvim-treesitter', -- Good highlighting, folding, etc.
 		github 'nvim-lua/plenary.nvim',           -- Utilities that some plugins depend on
