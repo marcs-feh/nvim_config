@@ -713,6 +713,7 @@ do
 	-- Mild optimizations, made to be quick to compile and run locally
 	local odin_cmd = "odin %s . -collection:shared=. -debug -o:none -reloc-mode:pic -thread-count:$(nproc) -microarch:native"
 	require 'compile'.setup {
+		save_on_compile = true,
 		language_commands = {
 			['odin'] = {
 				build = odin_cmd:format('build'),
