@@ -377,7 +377,7 @@ do
 		--]]
 	}
 	local selection = '#3d598d'
-	local comment = '#727272'
+	local comment = '#808080'
 	vim.cmd(("hi! Visual guifg='%s' guibg='%s'"):format(colors.fg_br, selection))
 	vim.cmd(("hi! Comment guifg='%s'"):format(comment))
 end
@@ -404,7 +404,7 @@ do
 			-- Build systems
 			'make', 'ninja', 'cmake', 'meson',
 			-- Markup and configuration
-			'html', 'xml', 'css', 'json', 'jsonc', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown', 'dockerfile',
+			'html', 'xml', 'css', 'json', 'jsonc', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown',
 			-- Other
 			'gitignore', 'csv', 'diff', 'sql', 'awk', 'graphql', 'verilog', 'nix',
 			--]]
@@ -603,7 +603,7 @@ do
 		-- Bash
 		bashls = false,
 		-- Rust
-		rust_analyzer = false,
+		rust_analyzer = true,
 		-- C/C++
 		clangd = {
 			cmd = {'clangd', '-header-insertion=never'}
@@ -699,14 +699,14 @@ end
 ---| Compile.nvim |---
 do
 	-- Mild optimizations, made to be quick to compile and run locally
-	local odin_cmd = "odin %s . -collection:shared=. -debug -o:none -reloc-mode:pic -thread-count:$(nproc) -microarch:native"
+	local odin_cmd = "odin %s . -collection:shared=. -debug -o:none -thread-count:$(nproc) -microarch:native"
 	require 'compile'.setup {
 		save_on_compile = true,
 		language_commands = {
 			['odin'] = {
 				build = odin_cmd:format('build'),
 				run   = odin_cmd:format('run'),
-				test  = odin_cmd:format('test'),
+				test  = odin_cmd:format('test') .. ' -all-packages',
 			},
 			['zig'] = {
 				build = 'zig build',
