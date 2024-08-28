@@ -2,6 +2,14 @@
 local utils = {}
 
 utils = {
+	get_group_fg = function(groupname)
+		return vim.fn.synIDattr(vim.fn.hlID(groupname), 'fg')
+	end,
+
+	get_group_bg = function(groupname)
+		return vim.fn.synIDattr(vim.fn.hlID(groupname), 'bg')
+	end,
+
 	set_opt = function(t, scope)
 		if not scope then scope = 'default' end
 		local opt_map = {
@@ -195,7 +203,6 @@ do
 		github 'nvim-lua/plenary.nvim',           -- Utilities that some plugins depend on
 		github 'neovim/nvim-lspconfig',           -- LSP configurations
 		github 'nvim-telescope/telescope.nvim',   -- Extensible fuzzy finder
-		github 'marcs-feh/colors-22.nvim',        -- Colorscheme
 		github 'marcs-feh/compile.nvim',          -- Compile code with a keybinding
 		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
@@ -331,55 +338,7 @@ end
 
 ---| Colorscheme |---
 do
-	local colors = {
-		-- Main colors
-		bg        = '#121212',
-		bg_alt    = '#222222',
-
-		bg_br     = '#424242',
-		bg_br_alt = '#525252',
-
-		fg        = '#ece7dd',
-		fg_alt    = '#ecd9b2',
-
-		fg_br     = '#fcf7ec',
-		fg_br_alt = '#ffffff',
-
-		-- Highlights
-		type         = '#5cb1d9',
-		type_alt     = '#57cdaa',
-
-		reserved     = '#f16c72',
-		reserved_alt = '#f16c72',
-
-		id           = '#ece7dd',
-		id_alt       = '#e1c36a',
-
-		literal      = '#f86784',
-		literal_alt  = '#f86784',
-
-		func         = '#afd759',
-		func_alt     = '#afd759',
-
-		str          = '#99c560',
-		str_alt      = '#99c560',
-
-		-- Diagnostic
-		error = '#d83e33',
-		warn  = '#f2ba41',
-		hint  = '#cda1ac',
-		info  = '#c8889f',
-	}
-	require 'colors-22'.setup {
-		transparent = false,
-		bright_cursor_line = false,
-		colors = colors,
-		--]]
-	}
-	local selection = '#3d598d'
-	local comment = '#808080'
-	vim.cmd(("hi! Visual guifg='%s' guibg='%s'"):format(colors.fg_br, selection))
-	vim.cmd(("hi! Comment guifg='%s'"):format(comment))
+	vim.cmd [[colors udark]]
 end
 
 ---| Treesitter |---
@@ -665,6 +624,17 @@ do
 	require 'mini.statusline'.setup{
 		use_icons = false,
 	}
+
+	local bg_col      = utils.get_group_bg('Normal')
+	local type_col    = utils.get_group_fg('Type')
+	local comment_col = utils.get_group_fg('Comment')
+	local const_col   = utils.get_group_fg('Constant')
+	local keyword_col = utils.get_group_fg('Keyword')
+
+	vim.cmd(("hi! MiniStatuslineModeNormal  guifg='%s' guibg='%s'"):format(bg_col, type_col))
+	vim.cmd(("hi! MiniStatuslineModeVisual  guifg='%s' guibg='%s'"):format(bg_col, comment_col))
+	vim.cmd(("hi! MiniStatuslineModeInsert  guifg='%s' guibg='%s'"):format(bg_col, const_col))
+	vim.cmd(("hi! MiniStatuslineModeCommand guifg='%s' guibg='%s'"):format(bg_col, keyword_col))
 
 	-- Tabline
 	require 'mini.tabline'.setup()
