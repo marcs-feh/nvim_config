@@ -203,7 +203,7 @@ do
 		github 'nvim-lua/plenary.nvim',           -- Utilities that some plugins depend on
 		github 'neovim/nvim-lspconfig',           -- LSP configurations
 		github 'nvim-telescope/telescope.nvim',   -- Extensible fuzzy finder
-		github 'marcs-feh/compile.nvim',          -- Compile code with a keybinding
+		github 'marcs-feh/vim-compile',           -- Compile files inside neovim
 		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
 
@@ -339,6 +339,8 @@ end
 ---| Colorscheme |---
 do
 	vim.cmd [[colors udark]]
+	vim.cmd [[hi! Normal guibg=#181818]]
+	vim.cmd [[hi! SignColumn guibg=NONE]]
 end
 
 ---| Treesitter |---
@@ -346,27 +348,17 @@ do
 	local ts_config = require 'nvim-treesitter.configs'
 
 	ts_config.setup {
-		sync_install = false, -- Enable if you have <8GB RAM, will take much longer to compile
+		sync_install = true, -- Enable if you have <8GB RAM, will take much longer to compile
 		ensure_installed = {
-			-- General purpose (Systems programming)
 			'c', 'cpp', 'odin', 'zig', 'rust', 'ada',
-			-- General purpose (Memory managed)
-			'java', 'c_sharp', 'go', 'python', 'ruby',
-			-- General purpose (Functional)
-			'erlang', 'elixir', 'ocaml', 'haskell', 'clojure', 'commonlisp',
-			-- Web dev
+			'java', 'c_sharp', 'go', 'python',
+			'erlang', 'elixir', 'ocaml', 'clojure', 'commonlisp',
 			'javascript', 'typescript', 'php',
-			-- Graphics and GPU accel.
 			'glsl', 'cuda', 'hlsl',
-			-- Scripting
-			'lua', 'scheme', 'vim', 'fish', 'bash', 'perl',
-			-- Build systems
+			'lua', 'scheme', 'vim', 'bash', 'perl',
 			'make', 'ninja', 'cmake', 'meson',
-			-- Markup and configuration
-			'html', 'xml', 'css', 'json', 'jsonc', 'org', 'latex', 'ini', 'toml', 'yaml', 'markdown',
-			-- Other
-			'gitignore', 'csv', 'diff', 'sql', 'awk', 'graphql', 'verilog', 'nix',
-			--]]
+			'html', 'xml', 'css', 'json', 'jsonc', 'ini', 'toml', 'markdown',
+			'gitignore', 'csv', 'diff', 'sql', 'awk', 'verilog', 'nix',
 		},
 
 		ignore_install = {'phpdoc', 'javadoc', 'v'},
@@ -609,6 +601,10 @@ do
 	end
 end
 
+---| vim-compile |---
+do
+	vim.cmd[[call compile#defaultMappings()]]
+end
 ---| Mini.nvim |---
 do
 	-- Extend motions a/i
@@ -664,37 +660,6 @@ do
 	map('n', '<leader>e', tele.find_files )
 	map('n', '<C-f>', tele.live_grep )
 
-end
-
----| Compile.nvim |---
-do
-	-- Mild optimizations, made to be quick to compile and run locally
-	local odin_cmd = "odin %s . -collection:shared=. -debug -o:none -thread-count:$(nproc) -microarch:native"
-	require 'compile'.setup {
-		save_on_compile = true,
-		language_commands = {
-			['odin'] = {
-				build = odin_cmd:format('build'),
-				run   = odin_cmd:format('run'),
-				test  = odin_cmd:format('test') .. ' -all-packages',
-			},
-			['zig'] = {
-				build = 'zig build',
-				run   = 'zig build run',
-				test  = 'zig build test',
-			},
-			['cpp'] = {
-				build = 'make build',
-				run   = 'make run',
-				test  = 'make test',
-			},
-			['c'] = {
-				build = 'make build',
-				run   = 'make run',
-				test  = 'make test',
-			},
-		},
-	}
 end
 
 ---| LSP Lines |---

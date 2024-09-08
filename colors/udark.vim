@@ -18,8 +18,10 @@ let s:cMidtone2 = '#787878'
 let s:cMidtone3 = '#969696'
 
 let s:cBlue        = '#569cd6'
+let s:cYellow      = '#dcdcaa'
 let s:cPink        = '#c586c0'
 let s:cGreen       = '#6a9955'
+let s:cCyan        = '#4ec9b0'
 let s:cOrange      = '#ce9178'
 let s:cRed         = '#f44747'
 let s:cLightOrange = '#d7ba7d'
@@ -78,10 +80,10 @@ call s:link('Title', 'Type')
 call s:clear('Question')
 call s:clear('NonText')
 
-call s:hiEx('Pmenu', s:cForeground, s:cMidtone0)
-call s:hiEx('PmenuSel', s:cForeground, s:cMidtone1)
-call s:hiEx('PmenuSBar', 'NONE', s:cMidtone1)
-call s:hiEx('PmenuThumb', s:cMidtone3, s:cMidtone2)
+call s:hiEx('Pmenu', s:cForeground, s:cFaded)
+call s:hiEx('PmenuSel', s:cForeground, s:cMidtone0)
+call s:hiEx('PmenuSBar', 'NONE', s:cMidtone0)
+call s:hiEx('PmenuThumb', s:cMidtone2, s:cMidtone1)
 call s:link('NormalFloat', 'Pmenu')
 
 call s:hiEx('SpellBad', s:cRed, 'NONE', 'underline')
@@ -142,11 +144,12 @@ call s:hi('Type', s:gType)
 call s:hi('String', s:gString)
 call s:hi('Comment', s:gComment)
 call s:hi('PreProc', s:gPreProc)
-call s:hi('Label', s:gIdentifier)
+call s:hi('Label', s:gConstant)
 
 " Neovim-only section
 if has('nvim')
   call s:hi('DiagnosticError', s:cRed)
+  call s:hi('DiagnosticUnnecessary', s:cMidtone1)
   call s:hi('DiagnosticWarn', s:cLightOrange)
   call s:hi('DiagnosticInfo', s:cMidtone3)
   call s:hi('DiagnosticHint', s:cMidtone3)
@@ -154,8 +157,9 @@ if has('nvim')
 
   call s:link('@type.builtin', 'Type')
   call s:link('@keyword.modifier.cpp', 'Type')
-  call s:link('@keyword.type', 'Type')
+  call s:link('@keyword.type', 'Keyword')
   call s:link('@constant.builtin', 'Keyword')
+  call s:hi('@module', s:cCyan)
 
   if s:telescopeIntegration
     call s:hiEx('TelescopeNormal', s:cForeground, s:cBackground, 'NONE')
