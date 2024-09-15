@@ -204,6 +204,7 @@ do
 		github 'neovim/nvim-lspconfig',           -- LSP configurations
 		github 'nvim-telescope/telescope.nvim',   -- Extensible fuzzy finder
 		github 'marcs-feh/vim-compile',           -- Compile files inside neovim
+		github 'marcs-feh/udark.vim',             -- VS style dark theme
 		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
 
