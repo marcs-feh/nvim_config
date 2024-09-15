@@ -508,7 +508,7 @@ do
 			b.minipairs_disable = true
 			local opts = {noremap = true, silent = true, buffer = 0}
 			map('n', '<leader>hg', function() utils.include_guard(0) end , opts)
-			map('i', '<C-f>', '->', opts)
+			map('i', '<C-l>', '->', opts)
 
 			-- cmd [[TSDisable indent]] -- Treesitter indentation doesnt play very well with macros
 		end
