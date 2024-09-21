@@ -200,7 +200,6 @@ do
 	local plugins = {
 		github 'echasnovski/mini.nvim',           -- Many small neovim extensions
 		github 'nvim-treesitter/nvim-treesitter', -- Good highlighting, folding, etc.
-		github 'nvim-lua/plenary.nvim',           -- Utilities that some plugins depend on
 		github 'neovim/nvim-lspconfig',           -- LSP configurations
 		github 'nvim-telescope/telescope.nvim',   -- Extensible fuzzy finder
 		github 'marcs-feh/vim-compile',           -- Compile files inside neovim
@@ -208,6 +207,7 @@ do
 		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
 
+	-- Icons copied form the default config
 	require 'lazy'.setup(plugins, {
 		root = lazyroot,
 		ui = { icons = { cmd = "⌘", config = "🛠", event = "📅", ft = "📂", init = "⚙", keys = "🗝", plugin = "🔌", runtime = "💻", require = "🌙", source = "📄", start = "🚀", task = "📌", lazy = "💤 ", }, },
