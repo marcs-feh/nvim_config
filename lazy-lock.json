@@ -1,0 +1,11 @@
+{
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "lsp_lines.nvim": { "branch": "main", "commit": "a92c755f182b89ea91bd8a6a2227208026f27b4d" },
+  "mini.nvim": { "branch": "main", "commit": "a8b1d74f45dadf3554c0eed784c6ccd8ade67883" },
+  "nvim-lspconfig": { "branch": "master", "commit": "3a7387a9c980304059b2bd7075684d6ef98ff331" },
+  "nvim-treesitter": { "branch": "master", "commit": "684eeac91ed8e297685a97ef70031d19ac1de25a" },
+  "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
+  "telescope.nvim": { "branch": "master", "commit": "a4ed82509cecc56df1c7138920a1aeaf246c0ac5" },
+  "udark.vim": { "branch": "main", "commit": "937218fab6f5f3267334a490911bf1d226c8701b" },
+  "vim-compile": { "branch": "master", "commit": "7e198abf4615df656179c7d8a6e83b8fb6873499" }
+}

@@ -189,12 +189,12 @@ do
 	end
 	vim.opt.runtimepath:prepend(lazypath)
 
-	local github = function(name)
-		return { url = ('http://github.com/%s'):format(name) }
+	local github = function(name, branch)
+		return { url = ('http://github.com/%s'):format(name), branch = branch }
 	end
 
-	local sourcehut = function(name)
-		return { url = ('http://git.sr.ht/%s'):format(name) }
+	local sourcehut = function(name, branch)
+		return { url = ('http://git.sr.ht/%s'):format(name), branch = branch }
 	end
 
 	local plugins = {
@@ -206,6 +206,7 @@ do
 		github 'marcs-feh/udark.vim',             -- VS style dark theme
 		sourcehut '~whynothugo/lsp_lines.nvim',   -- Prettier LSP diagnostics
 	}
+
 
 	-- Icons copied form the default config
 	require 'lazy'.setup(plugins, {
@@ -351,15 +352,8 @@ do
 	ts_config.setup {
 		sync_install = true, -- Enable if you have <8GB RAM, will take much longer to compile
 		ensure_installed = {
-			'c', 'cpp', 'odin', 'zig', 'rust', 'ada',
-			'java', 'c_sharp', 'go', 'python',
-			'erlang', 'elixir', 'ocaml', 'clojure', 'commonlisp',
-			'javascript', 'typescript', 'php',
-			'glsl', 'cuda', 'hlsl',
-			'lua', 'scheme', 'vim', 'bash', 'perl',
-			'make', 'ninja', 'cmake', 'meson',
-			'html', 'xml', 'css', 'json', 'jsonc', 'ini', 'toml', 'markdown',
-			'gitignore', 'csv', 'diff', 'sql', 'awk', 'verilog', 'nix',
+			'c', 'cpp', 'odin', 'zig', 'rust', 'ada', 'pascal', 'go', 'python',
+			'erlang', 'elixir', 'ocaml', 'lua', 'vim', 'bash','sql', 'markdown',
 		},
 
 		ignore_install = {'phpdoc', 'javadoc', 'v'},
@@ -529,11 +523,10 @@ do
 
 end
 
-
 ---| LSP |---
 do
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
+	capabilities.textDocument.completion.completionItem.snippetSupport = false
 
 	-- Enable a server by providing a config table or using `true`
 	-- Disable by not providing its name or by setting it to `false`/`nil`
@@ -647,10 +640,14 @@ do
 
 	-- Auto pairs
 	require 'mini.pairs'.setup()
-	vim.g.minipairs_disable = false -- Disable by default
+	vim.g.minipairs_disable = true -- Disable by default
 
 	-- Completion
-	require 'mini.completion'.setup{}
+	require 'mini.completion'.setup{
+		lsp_completion = {
+			auto_setup = false,
+		}
+	}
 end
 
 ---| Telescope |---
